@@ -1,21 +1,28 @@
+<?php
+/**
+ * Title: front-page
+ * Slug: la-nave-de-euterpe/front-page
+ * Inserter: no
+ */
+?>
 <!-- wp:template-part {"slug":"header","area":"header"} /-->
 
 <!-- wp:group {"metadata":{"name":"Hero Block"},"className":"behind-navbar-block","style":{"spacing":{"margin":{"top":"0"}},"dimensions":{"minHeight":""}},"layout":{"type":"default"}} -->
 <div class="wp-block-group behind-navbar-block" style="margin-top:0"><!-- wp:cover {"url":"http://la-nave-de-euterpe.local/wp-content/uploads/2025/10/aulos_gray.jpg","alt":"Musa Euterpe","hasParallax":true,"isUserOverlayColor":true,"minHeight":100,"minHeightUnit":"vh","customGradient":"linear-gradient(0deg,rgb(14,29,18) 2%,rgba(13,28,17,0.85) 100%)","sizeSlug":"full","className":"main-bg-position","style":{"spacing":{"padding":{"top":"var:preset|spacing|xxx-large","bottom":"var:preset|spacing|xxx-large","right":"var:preset|spacing|medium","left":"var:preset|spacing|medium"}}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-cover has-parallax main-bg-position" style="padding-top:var(--wp--preset--spacing--xxx-large);padding-right:var(--wp--preset--spacing--medium);padding-bottom:var(--wp--preset--spacing--xxx-large);padding-left:var(--wp--preset--spacing--medium);min-height:100vh"><div role="img" aria-label="Musa Euterpe" class="wp-block-cover__image-background size-full has-parallax" style="background-position:50% 50%;background-image:url(http://la-nave-de-euterpe.local/wp-content/uploads/2025/10/aulos_gray.jpg)"></div><span aria-hidden="true" class="wp-block-cover__background has-background-dim-100 has-background-dim wp-block-cover__gradient-background has-background-gradient" style="background:linear-gradient(0deg,rgb(14,29,18) 2%,rgba(13,28,17,0.85) 100%)"></span><div class="wp-block-cover__inner-container"><!-- wp:columns {"verticalAlignment":"center","className":"hero-block"} -->
+<div class="wp-block-cover has-parallax main-bg-position" style="padding-top:var(--wp--preset--spacing--xxx-large);padding-right:var(--wp--preset--spacing--medium);padding-bottom:var(--wp--preset--spacing--xxx-large);padding-left:var(--wp--preset--spacing--medium);min-height:100vh"><div role="img" aria-label="Musa Euterpe" class="wp-block-cover__image-background  size-full has-parallax" style="background-position:50% 50%;background-image:url(http://la-nave-de-euterpe.local/wp-content/uploads/2025/10/aulos_gray.jpg)"></div><span aria-hidden="true" class="wp-block-cover__background has-background-dim-100 has-background-dim wp-block-cover__gradient-background has-background-gradient" style="background:linear-gradient(0deg,rgb(14,29,18) 2%,rgba(13,28,17,0.85) 100%)"></span><div class="wp-block-cover__inner-container"><!-- wp:columns {"verticalAlignment":"center","className":"hero-block"} -->
 <div class="wp-block-columns are-vertically-aligned-center hero-block"><!-- wp:column {"verticalAlignment":"center","width":"65%","className":"col-left"} -->
 <div class="wp-block-column is-vertically-aligned-center col-left" style="flex-basis:65%"><!-- wp:group {"align":"wide","layout":{"type":"constrained","justifyContent":"left"}} -->
 <div class="wp-block-group alignwide"><!-- wp:group {"align":"wide","className":"anim","layout":{"type":"flex","orientation":"vertical"}} -->
-<div class="wp-block-group alignwide anim"><!-- wp:heading {"textAlign":"left","level":1,"style":{"elements":{"link":{"color":{"text":"var:preset|color|lilly-white"}}},"typography":{"fontStyle":"normal","fontWeight":"500","lineHeight":"1","fontSize":"7rem"},"layout":{"selfStretch":"fit","flexSize":null}},"textColor":"lilly-white","fontFamily":"cormorant"} -->
-<h1 class="wp-block-heading has-text-align-left has-lilly-white-color has-text-color has-link-color has-cormorant-font-family" style="font-size:7rem;font-style:normal;font-weight:500;line-height:1">LA NAVE DE EUTERPE</h1>
+<div class="wp-block-group alignwide anim"><!-- wp:heading {"textAlign":"left","level":1,"style":{"elements":{"link":{"color":{"text":"var:preset|color|lilly-white"}}},"typography":{"fontStyle":"normal","fontWeight":"400","lineHeight":"1","fontSize":"7rem"},"layout":{"selfStretch":"fit","flexSize":null}},"textColor":"lilly-white","fontFamily":"cormorant"} -->
+<h1 class="wp-block-heading has-text-align-left has-lilly-white-color has-text-color has-link-color has-cormorant-font-family" style="font-size:7rem;font-style:normal;font-weight:400;line-height:1">LA NAVE DE EUTERPE</h1>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"className":"intro","style":{"elements":{"link":{"color":{"text":"var:preset|color|text-muted-lilly-white"}}},"typography":{"lineHeight":"1.8"}},"textColor":"text-muted-lilly-white"} -->
 <p class="intro has-text-muted-lilly-white-color has-text-color has-link-color" style="line-height:1.8">La Nave de Euterpe&nbsp;es una asociación sin ánimo de lucro que nace con la intención de conectar entre sí energías culturales que, aisladas y aletargadas, yacen en nuestro entorno. Queremos dar oportunidades al pensamiento y el arte de quienes desean manifestarse públicamente, y hacernos así partícipes de unas riquezas culturales que tenemos al alcance de la mano, sin que seamos conscientes de ello.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:buttons {"className":"btn-w-100","style":{"spacing":{"margin":{"top":"var:preset|spacing|small"}}}} -->
-<div class="wp-block-buttons btn-w-100" style="margin-top:var(--wp--preset--spacing--small)"><!-- wp:button {"className":"is-style-secondary-outline"} -->
+<!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|small"}}}} -->
+<div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--small)"><!-- wp:button {"className":"is-style-secondary-outline"} -->
 <div class="wp-block-button is-style-secondary-outline"><a class="wp-block-button__link wp-element-button" href="http://la-nave-de-euterpe.local/presentacion/">Más información</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
@@ -26,7 +33,7 @@
 <!-- wp:column {"verticalAlignment":"center","width":"55%","className":"col-right","layout":{"type":"default"}} -->
 <div class="wp-block-column is-vertically-aligned-center col-right" style="flex-basis:55%"><!-- wp:group {"className":"anim","layout":{"type":"constrained"}} -->
 <div class="wp-block-group anim"><!-- wp:image {"aspectRatio":"1","scale":"cover","sizeSlug":"full","linkDestination":"none"} -->
-<figure class="wp-block-image size-full"><img src="http://la-nave-de-euterpe.local/wp-content/uploads/2025/09/la-nave.jpg" alt="" style="aspect-ratio:1;object-fit:cover"/></figure>
+<figure class="wp-block-image size-full"><img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/la-nave.jpg" alt="La Nave de Euterpe" class="" style="aspect-ratio:1;object-fit:cover"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:group --></div>
 <!-- /wp:column --></div>
@@ -42,14 +49,14 @@
 
 <!-- wp:group {"style":{"spacing":{"margin":{"top":"0"},"padding":{"right":"var:preset|spacing|medium","left":"var:preset|spacing|medium","top":"var:preset|spacing|xxx-large","bottom":"var:preset|spacing|xxx-large"}},"dimensions":{"minHeight":""}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group" style="margin-top:0;padding-top:var(--wp--preset--spacing--xxx-large);padding-right:var(--wp--preset--spacing--medium);padding-bottom:var(--wp--preset--spacing--xxx-large);padding-left:var(--wp--preset--spacing--medium)"><!-- wp:group {"metadata":{"name":"Section Title Block"},"className":"anim","style":{"spacing":{"blockGap":"var:preset|spacing|medium"}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group anim"><!-- wp:paragraph {"className":"headings-subtitle","style":{"elements":{"link":{"color":{"text":"var:preset|color|text-muted-lilly-white"}}}},"textColor":"text-muted-lilly-white","fontSize":"medium"} -->
-<p class="headings-subtitle has-text-muted-lilly-white-color has-text-color has-link-color has-medium-font-size">PRÓXIMOS EVENTOS</p>
-<!-- /wp:paragraph -->
+<div class="wp-block-group anim"><!-- wp:heading {"level":4,"style":{"elements":{"link":{"color":{"text":"var:preset|color|text-muted-lilly-white"}}}},"textColor":"text-muted-lilly-white","fontSize":"medium"} -->
+<h4 class="wp-block-heading has-text-muted-lilly-white-color has-text-color has-link-color has-medium-font-size">PRÓXIMOS EVENTOS</h4>
+<!-- /wp:heading -->
 
 <!-- wp:columns {"verticalAlignment":"bottom"} -->
 <div class="wp-block-columns are-vertically-aligned-bottom"><!-- wp:column {"verticalAlignment":"bottom","width":"75%"} -->
-<div class="wp-block-column is-vertically-aligned-bottom" style="flex-basis:75%"><!-- wp:heading {"style":{"elements":{"link":{"color":{"text":"var:preset|color|lilly-white"}}},"typography":{"textTransform":"uppercase","fontStyle":"normal","fontWeight":"500","lineHeight":"0.75"},"layout":{"selfStretch":"fit","flexSize":null}},"textColor":"lilly-white","fontSize":"section-title","fontFamily":"cormorant"} -->
-<h2 class="wp-block-heading has-lilly-white-color has-text-color has-link-color has-cormorant-font-family has-section-title-font-size" style="font-style:normal;font-weight:500;line-height:0.75;text-transform:uppercase">PROGRAMACIÓN</h2>
+<div class="wp-block-column is-vertically-aligned-bottom" style="flex-basis:75%"><!-- wp:heading {"level":3,"style":{"elements":{"link":{"color":{"text":"var:preset|color|lilly-white"}}},"typography":{"textTransform":"uppercase","fontStyle":"normal","fontWeight":"500","lineHeight":"0.75"},"layout":{"selfStretch":"fit","flexSize":null}},"textColor":"lilly-white","fontSize":"section-title","fontFamily":"cormorant"} -->
+<h3 class="wp-block-heading has-lilly-white-color has-text-color has-link-color has-cormorant-font-family has-section-title-font-size" style="font-style:normal;font-weight:500;line-height:0.75;text-transform:uppercase">PROGRAMACIÓN</h3>
 <!-- /wp:heading --></div>
 <!-- /wp:column -->
 
@@ -62,8 +69,8 @@
 <!-- /wp:group -->
 
 <!-- wp:group {"className":"anim","style":{"spacing":{"margin":{"top":"var:preset|spacing|x-large"}}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group anim" style="margin-top:var(--wp--preset--spacing--x-large)"><!-- wp:columns {"verticalAlignment":"bottom","className":"actividades-special-column","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|large"}}}} -->
-<div class="wp-block-columns are-vertically-aligned-bottom actividades-special-column"><!-- wp:column {"width":"33%"} -->
+<div class="wp-block-group anim" style="margin-top:var(--wp--preset--spacing--x-large)"><!-- wp:columns {"verticalAlignment":"bottom","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|large"}}}} -->
+<div class="wp-block-columns are-vertically-aligned-bottom"><!-- wp:column {"width":"33%"} -->
 <div class="wp-block-column" style="flex-basis:33%"><!-- wp:group {"layout":{"type":"flex","orientation":"vertical"}} -->
 <div class="wp-block-group"><!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|x-small-4"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group"><!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|lilly-white"}}},"typography":{"fontStyle":"normal","fontWeight":"600"}},"textColor":"lilly-white","fontSize":"medium"} -->
@@ -112,7 +119,7 @@
 <div class="wp-block-query"><!-- wp:post-template {"className":"post-overlay","style":{"spacing":{"blockGap":"var:preset|spacing|medium"}},"layout":{"type":"grid","columnCount":2,"minimumColumnWidth":null}} -->
 <!-- wp:post-featured-image {"isLink":true,"aspectRatio":"1"} /-->
 
-<!-- wp:group {"className":"info","style":{"spacing":{"blockGap":"var:preset|spacing|x-small-4"}},"layout":{"type":"constrained","justifyContent":"left"}} -->
+<!-- wp:group {"className":"info","style":{"spacing":{"blockGap":"0"}},"layout":{"type":"constrained","justifyContent":"left"}} -->
 <div class="wp-block-group info"><!-- wp:post-title {"isLink":true,"style":{"elements":{"link":{"color":{"text":"var:preset|color|lilly-white"}}},"typography":{"textTransform":"uppercase","letterSpacing":"1px"}},"textColor":"lilly-white","fontFamily":"cormorant"} /-->
 
 <!-- wp:group {"align":"full","layout":{"type":"default"}} -->
@@ -128,8 +135,8 @@
 <!-- /wp:column --></div>
 <!-- /wp:columns -->
 
-<!-- wp:buttons {"className":"btn-w-100","style":{"spacing":{"margin":{"top":"var:preset|spacing|x-large"}}},"layout":{"type":"flex","justifyContent":"left"}} -->
-<div class="wp-block-buttons btn-w-100" style="margin-top:var(--wp--preset--spacing--x-large)"><!-- wp:button {"className":"is-style-secondary-outline"} -->
+<!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|x-large"}}},"layout":{"type":"flex","justifyContent":"left"}} -->
+<div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--x-large)"><!-- wp:button {"className":"is-style-secondary-outline"} -->
 <div class="wp-block-button is-style-secondary-outline"><a class="wp-block-button__link wp-element-button" href="http://la-nave-de-euterpe.local/programacion/">Programa Completo</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
@@ -144,14 +151,14 @@
 
 <!-- wp:group {"style":{"spacing":{"margin":{"top":"0"},"padding":{"right":"var:preset|spacing|medium","left":"var:preset|spacing|medium","top":"var:preset|spacing|xxx-large","bottom":"var:preset|spacing|xxx-large"}},"dimensions":{"minHeight":""}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group" style="margin-top:0;padding-top:var(--wp--preset--spacing--xxx-large);padding-right:var(--wp--preset--spacing--medium);padding-bottom:var(--wp--preset--spacing--xxx-large);padding-left:var(--wp--preset--spacing--medium)"><!-- wp:group {"metadata":{"name":"Section Title Block"},"className":"anim","style":{"spacing":{"blockGap":"var:preset|spacing|medium"}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group anim"><!-- wp:paragraph {"className":"headings-subtitle","style":{"elements":{"link":{"color":{"text":"var:preset|color|text-muted-lilly-white"}}}},"textColor":"text-muted-lilly-white","fontSize":"medium"} -->
-<p class="headings-subtitle has-text-muted-lilly-white-color has-text-color has-link-color has-medium-font-size">ARTÍCULOS Y REFLEXIONES</p>
-<!-- /wp:paragraph -->
+<div class="wp-block-group anim"><!-- wp:heading {"level":4,"style":{"elements":{"link":{"color":{"text":"var:preset|color|text-muted-lilly-white"}}}},"textColor":"text-muted-lilly-white","fontSize":"medium"} -->
+<h4 class="wp-block-heading has-text-muted-lilly-white-color has-text-color has-link-color has-medium-font-size">ARTÍCULOS Y REFLEXIONES</h4>
+<!-- /wp:heading -->
 
 <!-- wp:columns {"verticalAlignment":"bottom"} -->
 <div class="wp-block-columns are-vertically-aligned-bottom"><!-- wp:column {"verticalAlignment":"bottom","width":"75%"} -->
-<div class="wp-block-column is-vertically-aligned-bottom" style="flex-basis:75%"><!-- wp:heading {"style":{"elements":{"link":{"color":{"text":"var:preset|color|lilly-white"}}},"typography":{"textTransform":"uppercase","fontStyle":"normal","fontWeight":"500","lineHeight":"0.75"},"layout":{"selfStretch":"fit","flexSize":null}},"textColor":"lilly-white","fontSize":"section-title","fontFamily":"cormorant"} -->
-<h2 class="wp-block-heading has-lilly-white-color has-text-color has-link-color has-cormorant-font-family has-section-title-font-size" style="font-style:normal;font-weight:500;line-height:0.75;text-transform:uppercase">PUBLICACIONES</h2>
+<div class="wp-block-column is-vertically-aligned-bottom" style="flex-basis:75%"><!-- wp:heading {"level":3,"style":{"elements":{"link":{"color":{"text":"var:preset|color|lilly-white"}}},"typography":{"textTransform":"uppercase","fontStyle":"normal","fontWeight":"500","lineHeight":"0.75"},"layout":{"selfStretch":"fit","flexSize":null}},"textColor":"lilly-white","fontSize":"section-title","fontFamily":"cormorant"} -->
+<h3 class="wp-block-heading has-lilly-white-color has-text-color has-link-color has-cormorant-font-family has-section-title-font-size" style="font-style:normal;font-weight:500;line-height:0.75;text-transform:uppercase">PUBLICACIONES</h3>
 <!-- /wp:heading --></div>
 <!-- /wp:column -->
 
@@ -196,14 +203,14 @@
 
 <!-- wp:group {"style":{"spacing":{"margin":{"top":"0"},"padding":{"right":"var:preset|spacing|medium","left":"var:preset|spacing|medium","top":"var:preset|spacing|xxx-large","bottom":"var:preset|spacing|xxx-large"}},"dimensions":{"minHeight":""}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group" style="margin-top:0;padding-top:var(--wp--preset--spacing--xxx-large);padding-right:var(--wp--preset--spacing--medium);padding-bottom:var(--wp--preset--spacing--xxx-large);padding-left:var(--wp--preset--spacing--medium)"><!-- wp:group {"metadata":{"name":"Section Title Block"},"className":"anim","style":{"spacing":{"blockGap":"var:preset|spacing|medium"}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group anim"><!-- wp:paragraph {"className":"headings-subtitle","style":{"elements":{"link":{"color":{"text":"var:preset|color|text-muted-lilly-white"}}}},"textColor":"text-muted-lilly-white","fontSize":"medium"} -->
-<p class="headings-subtitle has-text-muted-lilly-white-color has-text-color has-link-color has-medium-font-size">ARTISTAS Y AMIGOS</p>
-<!-- /wp:paragraph -->
+<div class="wp-block-group anim"><!-- wp:heading {"level":4,"style":{"elements":{"link":{"color":{"text":"var:preset|color|text-muted-lilly-white"}}}},"textColor":"text-muted-lilly-white","fontSize":"medium"} -->
+<h4 class="wp-block-heading has-text-muted-lilly-white-color has-text-color has-link-color has-medium-font-size">ARTISTAS Y AMIGOS</h4>
+<!-- /wp:heading -->
 
 <!-- wp:columns {"verticalAlignment":"bottom"} -->
 <div class="wp-block-columns are-vertically-aligned-bottom"><!-- wp:column {"verticalAlignment":"bottom","width":"75%"} -->
-<div class="wp-block-column is-vertically-aligned-bottom" style="flex-basis:75%"><!-- wp:heading {"style":{"elements":{"link":{"color":{"text":"var:preset|color|lilly-white"}}},"typography":{"textTransform":"uppercase","fontStyle":"normal","fontWeight":"500","lineHeight":"0.75"},"layout":{"selfStretch":"fit","flexSize":null}},"textColor":"lilly-white","fontSize":"section-title","fontFamily":"cormorant"} -->
-<h2 class="wp-block-heading has-lilly-white-color has-text-color has-link-color has-cormorant-font-family has-section-title-font-size" style="font-style:normal;font-weight:500;line-height:0.75;text-transform:uppercase">COLABORADORES</h2>
+<div class="wp-block-column is-vertically-aligned-bottom" style="flex-basis:75%"><!-- wp:heading {"level":3,"style":{"elements":{"link":{"color":{"text":"var:preset|color|lilly-white"}}},"typography":{"textTransform":"uppercase","fontStyle":"normal","fontWeight":"500","lineHeight":"0.75"},"layout":{"selfStretch":"fit","flexSize":null}},"textColor":"lilly-white","fontSize":"section-title","fontFamily":"cormorant"} -->
+<h3 class="wp-block-heading has-lilly-white-color has-text-color has-link-color has-cormorant-font-family has-section-title-font-size" style="font-style:normal;font-weight:500;line-height:0.75;text-transform:uppercase">COLABORADORES</h3>
 <!-- /wp:heading --></div>
 <!-- /wp:column -->
 
@@ -215,17 +222,33 @@
 <!-- /wp:columns --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"className":"anim","style":{"spacing":{"margin":{"top":"var:preset|spacing|x-large"}}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group anim" style="margin-top:var(--wp--preset--spacing--x-large)"><!-- wp:shortcode -->
-[colaboradores_slider]
-<!-- /wp:shortcode --></div>
+<!-- wp:group {"style":{"spacing":{"margin":{"top":"var:preset|spacing|x-large"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group" style="margin-top:var(--wp--preset--spacing--x-large)"><!-- wp:columns {"verticalAlignment":"bottom","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|large"}}}} -->
+<div class="wp-block-columns are-vertically-aligned-bottom"><!-- wp:column {"width":"100%"} -->
+<div class="wp-block-column" style="flex-basis:100%"><!-- wp:query {"queryId":43,"query":{"perPage":5,"pages":0,"offset":0,"postType":"colaborador","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false,"parents":[],"format":[]}} -->
+<div class="wp-block-query"><!-- wp:post-template {"className":"post-colaborador anim","style":{"spacing":{"blockGap":"var:preset|spacing|medium"}},"layout":{"type":"grid","columnCount":null,"minimumColumnWidth":"12rem"}} -->
+<!-- wp:post-featured-image {"isLink":true,"aspectRatio":"3/4"} /-->
+
+<!-- wp:group {"className":"info","style":{"spacing":{"blockGap":"var:preset|spacing|x-small-8"}},"layout":{"type":"constrained","justifyContent":"left"}} -->
+<div class="wp-block-group info"><!-- wp:post-title {"textAlign":"center","level":3,"isLink":true,"style":{"elements":{"link":{"color":{"text":"var:preset|color|accent-2"}}},"typography":{"textTransform":"uppercase"}},"textColor":"accent-2","fontFamily":"cormorant"} /--></div>
+<!-- /wp:group -->
+<!-- /wp:post-template --></div>
+<!-- /wp:query --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:buttons {"style":{"spacing":{"margin":{"top":"var:preset|spacing|x-large"}}},"layout":{"type":"flex","justifyContent":"center"}} -->
+<div class="wp-block-buttons" style="margin-top:var(--wp--preset--spacing--x-large)"><!-- wp:button {"className":"is-style-secondary-outline"} -->
+<div class="wp-block-button is-style-secondary-outline"><a class="wp-block-button__link wp-element-button" href="http://la-nave-de-euterpe.local/colaboradores/">Listado Completo</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
-<!-- wp:cover {"url":"http://la-nave-de-euterpe.local/wp-content/uploads/2025/09/aulos-player-1024x700.png","dimRatio":0,"isUserOverlayColor":true,"focalPoint":{"x":0.81000000000000005,"y":0.28999999999999998},"isDark":false,"sizeSlug":"large","className":"newsletter-overlay","style":{"spacing":{"padding":{"top":"var:preset|spacing|xxx-large","bottom":"var:preset|spacing|xxx-large"}}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-cover is-light newsletter-overlay" style="padding-top:var(--wp--preset--spacing--xxx-large);padding-bottom:var(--wp--preset--spacing--xxx-large)"><img class="wp-block-cover__image-background size-large" alt="" src="http://la-nave-de-euterpe.local/wp-content/uploads/2025/09/aulos-player-1024x700.png" style="object-position:81% 29%" data-object-fit="cover" data-object-position="81% 29%"/><span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:group {"className":"newsletter-home anim","style":{"spacing":{"margin":{"top":"0"}}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group newsletter-home anim" style="margin-top:0"><!-- wp:heading {"textAlign":"center","style":{"elements":{"link":{"color":{"text":"var:preset|color|white"}}},"typography":{"textTransform":"uppercase","fontStyle":"normal","fontWeight":"500","lineHeight":"1.05"},"layout":{"selfStretch":"fit","flexSize":null}},"textColor":"white","fontSize":"section-title","fontFamily":"cormorant"} -->
-<h2 class="wp-block-heading has-text-align-center has-white-color has-text-color has-link-color has-cormorant-font-family has-section-title-font-size" style="font-style:normal;font-weight:500;line-height:1.05;text-transform:uppercase">Boletín cultural </h2>
+<!-- wp:cover {"url":"<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/aulos_gray-1024x728.jpg","alt":"Musa Euterpe","dimRatio":0,"isUserOverlayColor":true,"isDark":false,"sizeSlug":"large","className":"newsletter-overlay","style":{"spacing":{"padding":{"top":"var:preset|spacing|xxx-large","bottom":"var:preset|spacing|xxx-large"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-cover is-light newsletter-overlay" style="padding-top:var(--wp--preset--spacing--xxx-large);padding-bottom:var(--wp--preset--spacing--xxx-large)"><img class="wp-block-cover__image-background  size-large" alt="Musa Euterpe" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/aulos_gray-1024x728.jpg" data-object-fit="cover"/><span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:group {"className":"newsletter-home anim","style":{"spacing":{"margin":{"top":"0"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group newsletter-home anim" style="margin-top:0"><!-- wp:heading {"textAlign":"center","level":3,"style":{"elements":{"link":{"color":{"text":"var:preset|color|white"}}},"typography":{"textTransform":"uppercase","fontStyle":"normal","fontWeight":"500","lineHeight":"1.05"},"layout":{"selfStretch":"fit","flexSize":null}},"textColor":"white","fontSize":"section-title","fontFamily":"cormorant"} -->
+<h3 class="wp-block-heading has-text-align-center has-white-color has-text-color has-link-color has-cormorant-font-family has-section-title-font-size" style="font-style:normal;font-weight:500;line-height:1.05;text-transform:uppercase">Boletín cultural </h3>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","className":"texto","style":{"typography":{"lineHeight":1.6000000000000001},"elements":{"link":{"color":{"text":"var:preset|color|white"}}}},"textColor":"white","fontSize":"default"} -->

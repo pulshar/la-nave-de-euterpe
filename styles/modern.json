@@ -34,7 +34,7 @@
           ],
           "fontFamily": "Nourd, sans-serif",
           "name": "Nourd",
-          "slug": "nourd"
+          "slug": "headings"
         },
         {
           "fontFace": [
@@ -83,7 +83,7 @@
           ],
           "fontFamily": "Inter, sans-serif",
           "name": "Inter",
-          "slug": "inter"
+          "slug": "body"
         }
       ]
     }
@@ -92,12 +92,12 @@
     "elements": {
       "heading": {
         "typography": {
-          "fontFamily": "var(--wp--preset--font-family--nourd)"
+          "fontFamily": "var(--wp--preset--font-family--headings)"
         }
       }
     },
     "typography": {
-      "fontFamily": "var(--wp--preset--font-family--inter)"
+      "fontFamily": "var(--wp--preset--font-family--body)"
     }
   }
 }

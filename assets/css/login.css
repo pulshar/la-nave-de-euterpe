@@ -1,0 +1,109 @@
+/* Cambiar el logo del login */
+.login h1 a {
+  background-image: url("../images/logo.svg"); /* ruta de tu logo */
+  background-size: contain;
+  width: 80px; /* ancho del logo */
+  height: 74px; /* alto del logo */
+  display: block;
+}
+.login form {
+  margin: 0;
+}
+
+/* Ajustar fondo de la página de login */
+body.login {
+  background-color: #f0f0f0;
+}
+
+/* Opcional: ocultar el texto del logo por defecto */
+.login h1 a .site-title,
+.login h1 a .site-description {
+  display: none;
+}
+#login {
+  display: grid;
+  justify-items: center;
+}
+.login .button.wp-hide-pw:focus {
+  background: 0 0;
+  border-color: transparent;
+  box-shadow: none;
+}
+.wp-core-ui .button-secondary:focus,
+.wp-core-ui .button.focus,
+.wp-core-ui .button:focus {
+  color: #0e1d12;
+}
+#backtoblog,
+.language-switcher {
+  display: none;
+}
+.wp-core-ui .button,
+.wp-core-ui .button-secondary {
+  color: color-mix(in srgb, #0e1d12 80%, transparent);
+  border-color: color-mix(in srgb, #0e1d12 80%, transparent);
+  background: transparent;
+  vertical-align: top;
+  transition: all 0.3s ease;
+}
+.wp-core-ui .button-primary {
+  background: color-mix(in srgb, #0e1d12 80%, transparent);
+  border-color: color-mix(in srgb, #0e1d12 80%, transparent);
+  color: #def4ff;
+  text-decoration: none;
+  text-shadow: none;
+}
+.wp-core-ui .button-primary.focus,
+.wp-core-ui .button-primary.hover,
+.wp-core-ui .button-primary:focus,
+.wp-core-ui .button-primary:hover,
+.wp-core-ui .button-primary.active,
+.wp-core-ui .button-primary:active {
+  background: #0e1d12;
+  border-color: #0e1d12;
+}
+.wp-core-ui .button-primary.focus,
+.wp-core-ui .button-primary:focus {
+  color: #def4ff;
+  box-shadow: 0 0 0 1px #fff, 0 0 0 3px #6b7b70;
+}
+
+.login #backtoblog a,
+.login #nav a {
+  text-decoration: none;
+  color: #0e1d12;
+}
+
+.login #backtoblog a:hover,
+.login #nav a:hover,
+.login h1 a:hover {
+  color: #0e1d12;
+}
+
+.login #backtoblog a:focus,
+.login #nav a:focus,
+.login h1 a:focus {
+  color: #0e1d12;
+}
+input[type="checkbox"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="radio"]:focus,
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+  border-color: #0e1d12;
+  color: #0e1d12;
+  box-shadow: 0 0 0 1px #0e1d12;
+  outline: 2px solid transparent;
+}
+
+input[type="checkbox"]:checked::before {
+  content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path d='M14.83 4.89l1.34.94-5.81 8.38H9.02L5.78 9.67l1.34-1.25 2.57 2.4z' fill='currentColor'/></svg>");
+}
+.login .message,
+.login .notice,
+.login .success {
+  border-left: 4px solid #0e1d12;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+}

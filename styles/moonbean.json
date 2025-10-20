@@ -11,12 +11,12 @@
               "fontFamily": "Moonbeam",
               "fontStyle": "Regular",
               "fontWeight": "400",
-              "src": ["file:./assets/fonts/moonbeam/moonbeam-regular.ttf"]
+              "src": ["file:./assets/fonts/moonbeam/moonbeam.woff2"]
             }
           ],
           "fontFamily": "Moonbeam, sans-serif",
           "name": "Moonbeam",
-          "slug": "moonbeam"
+          "slug": "headings"
         },
         {
           "fontFace": [
@@ -65,7 +65,7 @@
           ],
           "fontFamily": "Inter, sans-serif",
           "name": "Inter",
-          "slug": "inter"
+          "slug": "body"
         }
       ]
     }
@@ -74,12 +74,12 @@
     "elements": {
       "heading": {
         "typography": {
-          "fontFamily": "var(--wp--preset--font-family--moonbeam)"
+          "fontFamily": "var(--wp--preset--font-family--headings)"
         }
       }
     },
     "typography": {
-      "fontFamily": "var(--wp--preset--font-family--inter)"
+      "fontFamily": "var(--wp--preset--font-family--body)"
     }
   }
 }

@@ -2,223 +2,343 @@
 /**
  * Functions and definitions
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
- * @package euterpe-nourd-font
+ * @package la-nave-de-euterpe
  * @since 2.0.0
  */
 
-/* Sets up theme defaults */
-function blank_setup() {
+/* --------------------------------------------------------------
+ *  LOGIN PAGE CUSTOMIZATION
+ * -------------------------------------------------------------- */
+function euterpe_login_custom_css() {
+	wp_enqueue_style(
+		'euterpe-login',
+		get_stylesheet_directory_uri() . '/assets/css/login.css',
+		array(),
+		filemtime( get_stylesheet_directory() . '/assets/css/login.css' )
+	);
+}
+add_action( 'login_enqueue_scripts', 'euterpe_login_custom_css' );
 
-		// Enqueue editor styles.
-		add_editor_style(
+
+/* --------------------------------------------------------------
+ *  THEME SETUP
+ * -------------------------------------------------------------- */
+function euterpe_setup() {
+
+	// Estilos del editor (usa el CSS principal)
+	add_editor_style( array( 'style.css' ) );
+
+	// Quitar patrones por defecto de WordPress
+	remove_theme_support( 'core-block-patterns' );
+
+}
+add_action( 'after_setup_theme', 'euterpe_setup' );
+
+
+/* --------------------------------------------------------------
+ *  ENQUEUE SCRIPTS & STYLES
+ * -------------------------------------------------------------- */
+function euterpe_enqueue_scripts() {
+
+	// Swiper
+	wp_enqueue_style( 'swiper-css', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css' );
+	wp_enqueue_script( 'swiper-js', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', array(), null, true );
+
+	// Lenis
+	wp_enqueue_script(
+		'lenis',
+		'https://cdn.jsdelivr.net/npm/@studio-freight/lenis@latest/bundled/lenis.min.js',
+		array(),
+		null,
+		true
+	);
+
+	// Estilos principales del tema
+	wp_enqueue_style(
+		'euterpe-style',
+		get_stylesheet_uri(),
+		array(),
+		filemtime( get_stylesheet_directory() . '/style.css' )
+	);
+
+	// Script principal dependiente de Swiper y Lenis
+	wp_enqueue_script(
+		'euterpe-main',
+		get_stylesheet_directory_uri() . '/assets/js/main.js',
+		array( 'swiper-js', 'lenis' ),
+		filemtime( get_stylesheet_directory() . '/assets/js/main.js' ),
+		true
+	);
+}
+add_action( 'wp_enqueue_scripts', 'euterpe_enqueue_scripts' );
+
+
+/* --------------------------------------------------------------
+ *  BLOCK STYLES (Buttons, Groups, Gallery)
+ * -------------------------------------------------------------- */
+if ( function_exists( 'register_block_style' ) ) {
+	
+register_block_style(
+  'core/heading',
+  [
+    'name'  => 'display',
+    'label' => 'Display',
+  ]
+);
+
+	// Buttons
+	register_block_style(
+		'core/button',
+		array(
+			'name'        => 'primary',
+			'label'       => __( 'Primary', 'euterpe' ),
+			'is_default'  => true,
+		)
+	);
+
+	register_block_style(
+		'core/button',
+		array(
+			'name'  => 'secondary',
+			'label' => __( 'Secondary', 'euterpe' ),
+		)
+	);
+
+	register_block_style(
+		'core/button',
+		array(
+			'name'  => 'primary-outline',
+			'label' => __( 'Primary Outline', 'euterpe' ),
+		)
+	);
+
+	register_block_style(
+		'core/button',
+		array(
+			'name'  => 'secondary-outline',
+			'label' => __( 'Secondary Outline', 'euterpe' ),
+		)
+	);
+
+	// Group
+	register_block_style(
+		'core/group',
+		array(
+			'name'         => 'blank-group',
+			'label'        => __( 'margin-top-0', 'euterpe' ),
+			'inline_style' => '.is-style-blank-group { margin-block-start: 0 !important; }',
+		)
+	);
+}
+
+
+/* --------------------------------------------------------------
+ *  BLOCK PATTERN CATEGORIES
+ * -------------------------------------------------------------- */
+function euterpe_register_block_pattern_categories() {
+
+	 register_block_pattern_category('euterpe', [
+        'label' => __('Euterpe', 'euterpe'),
+    ]);
+
+    register_block_pattern_category('euterpe_hero', [
+        'label' => __('Hero', 'euterpe'),
+    ]);
+
+     register_block_pattern_category('euterpe_slider', [
+        'label' => __('Slider', 'euterpe'),
+    ]);
+}
+add_action( 'init', 'euterpe_register_block_pattern_categories' );
+
+
+/* --------------------------------------------------------------
+ *  SHORTCODE: PROGRAMACIÓN POR MES
+ * -------------------------------------------------------------- */
+function mostrar_programacion_por_mes( $atts ) {
+	$atts = shortcode_atts(
+		array( 'tipo' => 'simple' ),
+		$atts,
+		'programacion_por_mes'
+	);
+
+	$hoy = current_time( 'Y-m-d' );
+
+	$args = array(
+		'post_type'      => 'actividad',
+		'posts_per_page' => -1,
+		'meta_key'       => 'fecha',
+		'orderby'        => 'meta_value',
+		'order'          => 'ASC',
+		'meta_type'      => 'NUMERIC',
+		'meta_query'     => array(
 			array(
-				'./style.css',
-			)
-		);
- 
-		// Remove core block patterns.
-		remove_theme_support( 'core-block-patterns' );
+				'key'     => 'fecha',
+				'value'   => str_replace( '-', '', $hoy ),
+				'compare' => '>=',
+				'type'    => 'NUMERIC',
+			),
+		),
+	);
 
+	$query = new WP_Query( $args );
+
+	if ( ! $query->have_posts() ) {
+		return '<p>' . __( 'No hay actividades programadas próximamente.', 'euterpe' ) . '</p>';
 	}
 
-add_action( 'after_setup_theme', 'blank_setup' );
+	$salida          = '';
+	$mes_actual      = '';
+	$meses_mostrados = array();
 
-// Loads styles and scripts
-function blank_enqueue_scripts() {
-    
-	wp_enqueue_style( 'blank-css', get_stylesheet_uri(), [], filemtime(get_stylesheet_directory() . '/style.css') );
+	while ( $query->have_posts() ) {
+		$query->the_post();
 
-      // Encolar Lenis desde CDN
-       wp_enqueue_script(
-        'lenis', 
-        'https://cdn.jsdelivr.net/npm/@studio-freight/lenis@latest/bundled/lenis.min.js',
-        array(), 
-        null,
-        true 
-    );
-	
-    wp_enqueue_script('blank-js', get_stylesheet_directory_uri() . '/assets/js/main.js', array(), '1.0', true);
+		$fecha_raw = trim( get_post_meta( get_the_ID(), 'fecha', true ) );
+		if ( empty( $fecha_raw ) ) {
+			continue;
+		}
+
+		$fecha_formateada = substr( $fecha_raw, 0, 4 ) . '-' . substr( $fecha_raw, 4, 2 ) . '-' . substr( $fecha_raw, 6, 2 );
+		$timestamp        = strtotime( $fecha_formateada );
+		if ( ! $timestamp ) {
+			continue;
+		}
+
+		$mes_clave     = date( 'Y-m', $timestamp );
+		$mes_titulo    = date_i18n( 'F Y', $timestamp );
+		$fecha_legible = date_i18n( 'j \d\e F', $timestamp );
+
+		if ( ! in_array( $mes_clave, $meses_mostrados, true ) ) {
+			if ( $mes_actual !== '' ) {
+				$salida .= '</ul></div>';
+			}
+
+			$clase_ul = ( $atts['tipo'] === 'completa' )
+				? 'lista-programacion grid-container post-overlay'
+				: 'lista-programacion';
+
+			$salida .= '<div class="mes-wrapper"><h2 class="mes-programacion">' . esc_html( ucfirst( $mes_titulo ) ) . '</h2>';
+			$salida .= '<ul class="' . esc_attr( $clase_ul ) . '">';
+
+			$mes_actual        = $mes_clave;
+			$meses_mostrados[] = $mes_clave;
+		}
+
+		if ( $atts['tipo'] === 'completa' ) {
+			$hora = get_post_meta( get_the_ID(), 'hora', true );
+
+			$salida .= '<li class="item-programacion">';
+			$salida .= '<figure><a href="' . esc_url( get_permalink() ) . '">' . get_the_post_thumbnail( get_the_ID(), 'medium' ) . '</a></figure>';
+			$salida .= '<div class="info">';
+			$salida .= '<h3>' . esc_html( get_the_title() ) . '</h3>';
+			$salida .= '<div class="fecha-hora"><p class="fecha">' . esc_html( $fecha_legible ) . '</p>';
+			if ( ! empty( $hora ) ) {
+				$salida .= '<p class="hora">' . esc_html( date_i18n( 'g:i a', strtotime( $hora ) ) ) . '</p>';
+			}
+			$salida .= '</div></div>';
+			$salida .= '</li>';
+		} else {
+			$salida .= '<li class="item-programacion"><a href="' . esc_url( get_permalink() ) . '">';
+			$salida .= '<span class="fecha">' . esc_html( $fecha_legible ) . '</span>';
+			$salida .= '<span class="title-actividad">' . esc_html( get_the_title() ) . '</span>';
+			$salida .= '</a></li>';
+		}
+	}
+
+	wp_reset_postdata();
+
+	$salida .= '</ul>';
+
+	return '<div class="programacion-mensual ' . esc_attr( $atts['tipo'] ) . '">' . $salida . '</div>';
 }
-add_action( 'wp_enqueue_scripts', 'blank_enqueue_scripts' );
+add_shortcode( 'programacion_por_mes', 'mostrar_programacion_por_mes' );
 
-
-// Example of a Block Style - Button
-
-if ( function_exists( 'register_block_style' ) ) {
-	 register_block_style(
-        'core/button',
-        [
-            'name'  => 'primary',
-            'label' => __('Primary', 'mi-tema'),
-			 'is_default'   => true,
-        ]
-    );
-    register_block_style(
-        'core/button',
-        [
-            'name'  => 'secondary',
-            'label' => __('Secondary', 'mi-tema'),
-        ]
-    );
-    register_block_style(
-        'core/button',
-        [
-            'name'  => 'primary-outline',
-            'label' => __('Primary Outline', 'mi-tema'),
-        ]
-    );
-    register_block_style(
-        'core/button',
-        [
-            'name'  => 'secondary-outline',
-            'label' => __('Secundary Outline', 'mi-tema'),
-        ]
-    );
-	register_block_style(
-        'core/group',
-        array(
-            'name'         => 'blank-group',
-            'label'        => __( 'margin-top-0', 'textdomain' ),
-            'is_default'   => false,
-            'inline_style' => '
-			.is-style-blank-group { margin-block-start: 0 !important; }
-			',
-        ) 
-    );
-}
-
-// Example of a Block Style for the Gallery - this sets the aspect ratio for the grid and as original on popup
-if ( function_exists( 'register_block_style' ) ) {
-    register_block_style(
-        'core/gallery',
-        array(
-            'name'         => 'blank-gallery',
-            'label'        => __( 'Square', 'textdomain' ),
-            'is_default'   => false,
-            'inline_style' => '
-			.is-style-blank-gallery > figure, .is-style-blank-gallery img { aspect-ratio: 1 !important; object-fit: cover !important; }
-			.lightbox-image-container, .lightbox-image-container * { aspect-ratio: auto !important; object-fit: contain !important; }
-			',
-        ) 
-    );
-}
-
-// Example of Register block pattern categories 
-function blank_register_block_pattern_categories() {
-
-	
-	 // Elimina los estilos "fill" y "outline"
-    unregister_block_style('core/button', 'fill');
-    unregister_block_style('core/button', 'outline');
-	
-	register_block_pattern_category(
-		'blank_page',
-		array(
-			'label'       => __( 'Page', 'blank' ),
-		)
-	);
-	register_block_pattern_category(
-		'blank_hero',
-		array(
-			'label'       => __( 'Hero', 'blank' ),
-		)
-	);
-    
-}
-add_action( 'init', 'blank_register_block_pattern_categories' );
-
-function mostrar_programacion_por_mes($atts) {
-    $atts = shortcode_atts(array(
-        'tipo' => 'simple', // por defecto simple
-    ), $atts, 'programacion_por_mes');
-
-    $hoy = current_time('Y-m-d');
-
+/* --------------------------------------------------------------
+ *  SHORTCODE: COLABORADORES SLIDER
+ * -------------------------------------------------------------- */
+function mostrar_colaboradores_slider() {
     $args = array(
-        'post_type'      => 'actividad',
+        'post_type'      => 'colaborador', // CPT de colaboradores
         'posts_per_page' => -1,
-        'meta_key'       => 'fecha',
-        'orderby'        => 'meta_value',
+        'orderby'        => 'title',
         'order'          => 'ASC',
-        'meta_type'      => 'NUMERIC',
-        'meta_query'     => array(
-            array(
-                'key'     => 'fecha',
-                'value'   => str_replace('-', '', $hoy),
-                'compare' => '>=',
-                'type'    => 'NUMERIC'
-            )
-        )
     );
 
     $query = new WP_Query($args);
 
     if (!$query->have_posts()) {
-        return '<p>No hay actividades programadas próximamente.</p>';
+        return '<p>No hay colaboradores disponibles.</p>';
     }
 
-    $salida = '';
-    $mes_actual = '';
-    $meses_mostrados = array();
+    $salida = '<div class="swiper"><div class="swiper-wrapper">';
+
     while ($query->have_posts()) {
         $query->the_post();
 
-        $fecha_raw = trim(get_post_meta(get_the_ID(), 'fecha', true));
-        if (empty($fecha_raw)) continue;
+        $nombre = get_the_title();
+        $enlace = get_permalink();
+        $imagen = get_the_post_thumbnail(get_the_ID(), 'original');
 
-        $fecha_formateada = substr($fecha_raw, 0, 4) . '-' . substr($fecha_raw, 4, 2) . '-' . substr($fecha_raw, 6, 2);
-        $timestamp = strtotime($fecha_formateada);
-        if (!$timestamp) continue;
-
-        $mes_clave   = date('Y-m', $timestamp);
-        $mes_titulo  = date_i18n('F Y', $timestamp);
-        $fecha_legible = date_i18n('j \d\e F', $timestamp);
-
-        if (!in_array($mes_clave, $meses_mostrados, true)) {
-            if ($mes_actual !== '') {
-                $salida .= '</ul></div>';
-            }
-            
-            $clase_ul = ($atts['tipo'] === 'completa') ? 'lista-programacion grid-container post-overlay' : 'lista-programacion';
-            $salida .= '<div class="mes-wrapper"><h2 class="mes-programacion">' . esc_html(ucfirst($mes_titulo)) . '</h2>';
-            $salida .= '<ul class="' . esc_attr($clase_ul) . '">';
-
-            $mes_actual = $mes_clave;
-            $meses_mostrados[] = $mes_clave;
+        // Cada colaborador como slide
+        $salida .= '<div class="swiper-slide colaborador-card"><a href="' . $enlace . '">';
+        if ($imagen) {
+            $salida .= '<figure class="colaborador-figura">' . $imagen . '</figure>';
         }
-
-        if ($atts['tipo'] === 'completa') {
-            $hora = get_post_meta(get_the_ID(), 'hora', true);
-
-            $salida .= '<li class="item-programacion">';
-            $salida .= '<figure><a href="' . esc_url(get_permalink()) . '">' . get_the_post_thumbnail(get_the_ID(), 'medium') . '</a></figure>';
-            $salida .= '<div class="info">';
-            $salida .= '<h3>' . get_the_title() . '</h3>';
-            $salida .= '<div class="fecha-hora"><p class="fecha">' . esc_html($fecha_legible) . '</p>';
-            if (!empty($hora)) {
-                $salida .= '<p class="hora">' . date_i18n('g:i a', strtotime($hora)) . '</p>';
-            }
-            $salida .= '</div></div>';
-            $salida .= '</li>';
-        } else {
-            $salida .= '<li class="item-programacion"><a href="' . esc_url(get_permalink()) . '">';
-            $salida .= '<span class="fecha">' . esc_html($fecha_legible) . '</span>';
-            $salida .= '<span class="title-actividad" href="' . esc_url(get_permalink()) . '">' . esc_html(get_the_title()) . '</span>';
-            $salida .= '</a></li>';
-        }
+        $salida .= '<div class="title-wrapper"><h3>' . esc_html($nombre) . '</h3></div>';
+        $salida .= '</div></a>';
     }
 
-    $salida .= '</ul>';
+    $salida .= '</div>'; // cerrar swiper-wrapper
+    $salida .= '<div class="swiper-pagination"></div>'; 
+    $salida .= '</div>'; // cerrar swiper container
+
     wp_reset_postdata();
 
-    return '<div class="programacion-mensual ' . esc_attr($atts['tipo']) . '">' . $salida . '</div>';
+    return $salida;
 }
-add_shortcode('programacion_por_mes', 'mostrar_programacion_por_mes');
+add_shortcode('colaboradores_slider', 'mostrar_colaboradores_slider');
 
 
-
-// Year Shortcode
-function currentYear( $atts ){
-    return date('Y');
+/* --------------------------------------------------------------
+ *  ADMIN LIMITS FOR EDITORS
+ * -------------------------------------------------------------- */
+function euterpe_limit_editor_admin_menu() {
+	if ( current_user_can( 'editor' ) && ! current_user_can( 'administrator' ) ) {
+		remove_menu_page( 'index.php' );                  // Escritorio
+		remove_menu_page( 'edit.php?post_type=page' );    // Páginas
+		remove_menu_page( 'edit-comments.php' );          // Comentarios
+		remove_menu_page( 'themes.php' );                 // Apariencia
+		remove_menu_page( 'plugins.php' );                // Plugins
+		remove_menu_page( 'users.php' );                  // Usuarios
+		remove_menu_page( 'tools.php' );                  // Herramientas
+		remove_menu_page( 'options-general.php' );        // Ajustes
+		remove_menu_page( 'edit.php?post_type=wp_block' ); // Bloques reutilizables
+		remove_menu_page( 'edit.php?post_type=wp_template' ); // Plantillas
+		remove_menu_page( 'edit.php?post_type=wp_template_part' ); // Partes de plantilla
+	}
 }
-add_shortcode( 'year', 'currentYear' );
+add_action( 'admin_menu', 'euterpe_limit_editor_admin_menu', 999 );
+
+function mytheme_preload_fonts() {
+    $fonts = [
+        '/assets/fonts/cormorant/cormorant-400-normal.woff2',
+        '/assets/fonts/cormorant/cormorant-500-normal.woff2'
+    ];
+
+    foreach ( $fonts as $font ) {
+        printf(
+            '<link rel="preload" href="%s%s" as="font" type="font/woff2" crossorigin>' . "\n",
+            get_template_directory_uri(),
+            esc_attr( $font )
+        );
+    }
+}
+add_action( 'wp_head', 'mytheme_preload_fonts' );
+/* --------------------------------------------------------------
+ *  SHORTCODE: CURRENT YEAR
+ * -------------------------------------------------------------- */
+function euterpe_current_year_shortcode() {
+	return date( 'Y' );
+}
+add_shortcode( 'year', 'euterpe_current_year_shortcode' );

@@ -1,4 +1,4 @@
-== euterpe-nourd-font ==
+== La Nave de Euterpe ==
 
 Contributors: Alvaro Quevedo
 Requires at least: 6.8
@@ -10,7 +10,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-Asociación Cultural La Nave de Euterpe
+La Nave de Euterpe es una asociación cultural sin ánimo de lucro que nace con la intención de conectar entre sí energías culturales que, aisladas y aletargadas, yacen en nuestro entorno.
 
 
 == Changelog ==
@@ -21,8 +21,8 @@ Asociación Cultural La Nave de Euterpe
 
 == Copyright ==
 
-euterpe-nourd-font WordPress Theme, (C) 2025 Alvaro Quevedo
-euterpe-nourd-font is distributed under the terms of the GNU GPL.
+La Nave de Euterpe WordPress Theme, (C) 2025 Alvaro Quevedo
+La Nave de Euterpe is distributed under the terms of the GNU GPL.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -35,5 +35,5 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
 
-euterpe-nourd-font is based on La Nave de Euterpe (), (C) Alvaro Quevedo, [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)
+La Nave de Euterpe is based on euterpe-nourd-font (), (C) Alvaro Quevedo, [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)
 

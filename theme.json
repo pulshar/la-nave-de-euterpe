@@ -22,7 +22,7 @@
 					"slug": "lilly-white"
 				},
 				{
-					"color": "#6b7b70",
+					"color": "#7c8d81",
 					"name": "Text Muted Lilly White",
 					"slug": "text-muted-lilly-white"
 				},
@@ -113,6 +113,7 @@
 				{
 					"fontFace": [
 						{
+							"fontDisplay": "swap",
 							"fontFamily": "Cormorant",
 							"fontStyle": "normal",
 							"fontWeight": "400",
@@ -121,6 +122,7 @@
 							]
 						},
 						{
+							"fontDisplay": "swap",
 							"fontFamily": "Cormorant",
 							"fontStyle": "normal",
 							"fontWeight": "500",
@@ -131,7 +133,7 @@
 					],
 					"fontFamily": "Cormorant, serif",
 					"name": "Cormorant",
-					"slug": "cormorant"
+					"slug": "headings"
 				},
 				{
 					"fontFace": [
@@ -194,7 +196,7 @@
 					],
 					"fontFamily": "Inter, sans-serif",
 					"name": "Inter",
-					"slug": "inter"
+					"slug": "body"
 				}
 			],
 			"fontSizes": [
@@ -287,6 +289,9 @@
 			"heading": {
 				"color": {
 					"text": "var(--wp--preset--color--lilly-white)"
+				},
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--headings)"
 				}
 			},
 			"link": {
@@ -296,7 +301,7 @@
 			}
 		},
 		"typography": {
-			"fontFamily": "var(--wp--preset--font-family--inter)"
+			"fontFamily": "var(--wp--preset--font-family--body)"
 		}
 	},
 	"templateParts": [

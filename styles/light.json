@@ -1,8 +1,8 @@
 {
 	"version": 3,
 	"$schema": "https://schemas.wp.org/trunk/theme.json",
-	"title": "Graphite",
-	"description":  "Graphite-based palette with two shades",
+	"title": "Light version",
+	"description":  "Light version palette",
 	"settings": {
 		"color": {
       "palette": [
@@ -22,7 +22,7 @@
           "slug": "lilly-white"
         },
         {
-          "color": "#777e88",
+          "color": "#686f78",
           "name": "Text Muted Lilly White",
           "slug": "text-muted-lilly-white"
         },
