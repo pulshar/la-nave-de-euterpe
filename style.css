@@ -321,12 +321,19 @@ a:where(:not(.wp-element-button):not(.post-noticias a)) {
   width: 90%;
   max-width: 500px;
   margin: 0 var(--wp--preset--spacing--medium);
+  box-shadow: 0px 5px 20px 3px color-mix(
+      in srgb,
+      var(--wp--preset--color--lilly-white) 10%,
+      transparent
+    );
   input {
-    width: 80%;
     padding: 0.75rem;
-    font-size: 1.1rem;
     border-radius: 3px;
-    border: 1px solid var(--wp--preset--color--text-muted-lilly-white);
+    border: 1px solid color-mix(
+      in srgb,
+      var(--wp--preset--color--text-muted-lilly-white) 20%,
+      transparent
+    );
     box-shadow: none;
     outline: none;
     color: var(--wp--preset--color--accent-1);
@@ -350,18 +357,17 @@ a:where(:not(.wp-element-button):not(.post-noticias a)) {
   .wp-block-search__button {
     background-color: color-mix(
           in srgb,
-          var(--wp--preset--color--accent-1) 100%,
+          var(--wp--preset--color--accent-1) 80%,
           transparent
         );
-    border: 2px solid var(--wp--preset--color--accent-1);
+    border: 0;
      color: var(--wp--preset--color--lilly-white);
      [data-scheme="dark"] & {
         background-color: color-mix(
           in srgb,
-          var(--wp--preset--color--accent-2) 100%,
+          var(--wp--preset--color--accent-2) 80%,
           transparent
         );
-    border: 2px solid var(--wp--preset--color--accent-2);
      color: var(--wp--preset--color--accent-1);
     }
     border-radius: 3px !important;
@@ -375,13 +381,13 @@ a:where(:not(.wp-element-button):not(.post-noticias a)) {
     &:hover {
       background-color: color-mix(
           in srgb,
-          var(--wp--preset--color--accent-1) 80%,
+          var(--wp--preset--color--accent-1) 100%,
           transparent
         );
          [data-scheme="dark"] & {
         background-color: color-mix(
           in srgb,
-          var(--wp--preset--color--accent-2) 80%,
+          var(--wp--preset--color--accent-2) 100%,
           transparent
         );
     }
