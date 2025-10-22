@@ -174,6 +174,15 @@ a:where(:not(.wp-element-button):not(.post-noticias a)) {
   transform: translateY(0);
 }
 
+/* Aplica solo en el editor */
+:where(.editor-styles-wrapper) h1,
+:where(.editor-styles-wrapper) h2,
+:where(.editor-styles-wrapper) h3,
+:where(.editor-styles-wrapper) h4,
+:where(.editor-styles-wrapper) h5,
+:where(.editor-styles-wrapper) h6 {
+  font-family: var(--wp--preset--font-family--body);
+}
 /* ===========================================================
    COMPONENTE: PILL (etiqueta redondeada)
    =========================================================== */
@@ -321,19 +330,17 @@ a:where(:not(.wp-element-button):not(.post-noticias a)) {
   width: 90%;
   max-width: 500px;
   margin: 0 var(--wp--preset--spacing--medium);
-  box-shadow: 0px 5px 20px 3px color-mix(
-      in srgb,
-      var(--wp--preset--color--lilly-white) 10%,
-      transparent
-    );
+  box-shadow: 0px 5px 20px 3px
+    color-mix(in srgb, var(--wp--preset--color--lilly-white) 10%, transparent);
   input {
     padding: 0.75rem;
     border-radius: 3px;
-    border: 1px solid color-mix(
-      in srgb,
-      var(--wp--preset--color--text-muted-lilly-white) 20%,
-      transparent
-    );
+    border: 1px solid
+      color-mix(
+        in srgb,
+        var(--wp--preset--color--text-muted-lilly-white) 20%,
+        transparent
+      );
     box-shadow: none;
     outline: none;
     color: var(--wp--preset--color--accent-1);
@@ -356,19 +363,19 @@ a:where(:not(.wp-element-button):not(.post-noticias a)) {
   }
   .wp-block-search__button {
     background-color: color-mix(
-          in srgb,
-          var(--wp--preset--color--accent-1) 80%,
-          transparent
-        );
+      in srgb,
+      var(--wp--preset--color--accent-1) 80%,
+      transparent
+    );
     border: 0;
-     color: var(--wp--preset--color--lilly-white);
-     [data-scheme="dark"] & {
-        background-color: color-mix(
-          in srgb,
-          var(--wp--preset--color--accent-2) 80%,
-          transparent
-        );
-     color: var(--wp--preset--color--accent-1);
+    color: var(--wp--preset--color--lilly-white);
+    [data-scheme="dark"] & {
+      background-color: color-mix(
+        in srgb,
+        var(--wp--preset--color--accent-2) 80%,
+        transparent
+      );
+      color: var(--wp--preset--color--accent-1);
     }
     border-radius: 3px !important;
 
@@ -380,17 +387,17 @@ a:where(:not(.wp-element-button):not(.post-noticias a)) {
     line-height: inherit;
     &:hover {
       background-color: color-mix(
-          in srgb,
-          var(--wp--preset--color--accent-1) 100%,
-          transparent
-        );
-         [data-scheme="dark"] & {
+        in srgb,
+        var(--wp--preset--color--accent-1) 100%,
+        transparent
+      );
+      [data-scheme="dark"] & {
         background-color: color-mix(
           in srgb,
           var(--wp--preset--color--accent-2) 100%,
           transparent
         );
-    }
+      }
     }
   }
 }
@@ -471,10 +478,19 @@ a:where(:not(.wp-element-button):not(.post-noticias a)) {
   .is-arrow-arrow {
     color: var(--wp--preset--color--accent-2);
     transition: all 0.25s var(--ease-out-back);
+    display: inline-block;
+  }
+  .wp-block-query-pagination-previous-arrow {
+    margin-right: var(--wp--preset--spacing--x-small-4);
+  }
+  .wp-block-query-pagination-next-arrow {
+    margin-left: var(--wp--preset--spacing--x-small-4);
   }
   .wp-block-query-pagination-next,
   .post-navigation-link-next {
+    color: var(--wp--preset--color--lilly-white);
     &:hover {
+      color: var(--wp--preset--color--accent-2);
       .is-arrow-arrow {
         transform: translateX(5px);
       }
@@ -482,47 +498,53 @@ a:where(:not(.wp-element-button):not(.post-noticias a)) {
   }
   .wp-block-query-pagination-previous,
   .post-navigation-link-previous {
+    color: var(--wp--preset--color--lilly-white);
     &:hover {
+      color: var(--wp--preset--color--accent-2);
       .is-arrow-arrow {
         transform: translateX(-5px);
       }
     }
   }
-
-  .page-numbers {
-    display: inline-flex;
+  .wp-block-query-pagination-numbers {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    gap: var(--wp--preset--spacing--x-small-8);
-    width: 40px;
-    height: 40px;
-    border-radius: 9999px;
-    color: color-mix(
-      in srgb,
-      var(--wp--preset--color--text-muted-lilly-white) 40%,
-      transparent
-    );
-    background: color-mix(
-      in srgb,
-      var(--wp--preset--color--lilly-white) 8%,
-      transparent
-    );
-    transition: var(--transition-1);
-    &.current {
-      color: var(--wp--preset--color--lilly-white);
-      pointer-events: none;
-    }
-    &:hover {
-      /* border-color: var(--wp--preset--color--lilly-white); */
-      color: var(--wp--preset--color--accent-2);
-      background: color-mix(
+    gap: var(--wp--preset--spacing--x-small-4);
+    .page-numbers {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--wp--preset--spacing--x-small-8);
+      width: 40px;
+      height: 40px;
+      border-radius: 9999px;
+      color: color-mix(
         in srgb,
-        var(--wp--preset--color--lilly-white) 15%,
+        var(--wp--preset--color--text-muted-lilly-white) 40%,
         transparent
       );
-    }
-    @media (max-width: 599px) {
-      display: none;
+      background: color-mix(
+        in srgb,
+        var(--wp--preset--color--lilly-white) 8%,
+        transparent
+      );
+      transition: var(--transition-1);
+      &.current {
+        color: var(--wp--preset--color--lilly-white);
+        pointer-events: none;
+      }
+      &:hover {
+        /* border-color: var(--wp--preset--color--lilly-white); */
+        color: var(--wp--preset--color--accent-2);
+        background: color-mix(
+          in srgb,
+          var(--wp--preset--color--lilly-white) 15%,
+          transparent
+        );
+      }
+      @media (max-width: 599px) {
+        display: none;
+      }
     }
   }
 }
@@ -555,7 +577,12 @@ a:where(:not(.wp-element-button):not(.post-noticias a)) {
     }
     input,
     textarea {
-      border-color: var(--wp--preset--color--text-muted-lilly-white) !important;
+      border: 1px solid
+        color-mix(
+          in srgb,
+          var(--wp--preset--color--text-muted-lilly-white) 40%,
+          transparent
+        ) !important;
       box-shadow: none;
       outline: none;
       color: var(--wp--preset--color--lilly-white) !important;
@@ -704,8 +731,10 @@ h4 {
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(22rem, 100%), 1fr));
-  container-type: inline-size;
+  grid-template-columns: 1fr;
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   gap: var(--wp--preset--spacing--medium);
 }
 
@@ -773,7 +802,9 @@ ul.post-overlay {
   figure {
     margin: 0;
     aspect-ratio: 1;
-
+    br {
+      display: none;
+    }
     a {
       display: block;
       height: 100%;
@@ -812,25 +843,29 @@ ul.post-overlay {
       bottom: 0;
       height: auto;
     }
+
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     padding: 1.5rem 1.5rem 1.25rem;
 
-    h3 {
+    h2 {
       font-family: var(--wp--preset--font-family--headings);
-      font-size: clamp(1.119rem, 1.119rem + ((1vw - 0.2rem) * 1.147), 1.75rem);
+      /* font-size: clamp(1.119rem, 1.119rem + ((1vw - 0.2rem) * 1.147), 1.75rem); */
       text-transform: uppercase;
+      letter-spacing: 1px;
       margin: 0;
       color: var(--wp--preset--color--lilly-white);
     }
-
+    p:empty {
+      display: none;
+    }
     .fecha-hora {
-      margin-block-start: var(--wp--preset--spacing--x-small-8);
       display: flex;
       align-items: center;
       gap: var(--wp--preset--spacing--x-small-8);
       justify-content: space-between;
+      flex-wrap: wrap;
 
       p {
         margin: 0;
@@ -851,8 +886,8 @@ ul.post-overlay {
       border: 2px solid var(--wp--preset--color--lilly-white);
       padding-top: var(--wp--preset--spacing--x-small-4);
       padding-bottom: var(--wp--preset--spacing--x-small-4);
-      padding-left: 12px;
-      padding-right: 12px;
+      padding-left: 10px;
+      padding-right: 10px;
       margin: 0;
       background-color: var(--wp--preset--color--lilly-white);
       color: var(--wp--preset--color--accent-1);
@@ -866,7 +901,7 @@ ul.post-overlay {
 
 /* --- Vista tipo listado / Grid actividades --- */
 .actividades-special-column {
-  flex-direction: column;
+  /* flex-direction: column; */
   @media (min-width: 1024px) {
     flex-direction: row;
   }
