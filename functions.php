@@ -19,7 +19,6 @@ function euterpe_login_custom_css() {
 }
 add_action( 'login_enqueue_scripts', 'euterpe_login_custom_css' );
 
-
 /* --------------------------------------------------------------
  *  THEME SETUP
  * -------------------------------------------------------------- */
@@ -33,7 +32,6 @@ function euterpe_setup() {
 
 }
 add_action( 'after_setup_theme', 'euterpe_setup' );
-
 
 /* --------------------------------------------------------------
  *  ENQUEUE SCRIPTS & STYLES
@@ -71,7 +69,6 @@ function euterpe_enqueue_scripts() {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'euterpe_enqueue_scripts' );
-
 
 /* --------------------------------------------------------------
  *  BLOCK STYLES (Buttons, Groups, Gallery)
@@ -131,7 +128,6 @@ register_block_style(
 	);
 }
 
-
 /* --------------------------------------------------------------
  *  BLOCK PATTERN CATEGORIES
  * -------------------------------------------------------------- */
@@ -151,6 +147,175 @@ function euterpe_register_block_pattern_categories() {
 }
 add_action( 'init', 'euterpe_register_block_pattern_categories' );
 
+/* --------------------------------------------------------------
+ *  Imagen destacada por defecto para el CPT 'actividad'
+ * -------------------------------------------------------------- */
+function actividad_default_thumbnail( $html, $post_id, $post_thumbnail_id, $size, $attr ) {
+
+    if ( get_post_type( $post_id ) !== 'actividad' ) {
+        return $html;
+    }
+    if ( ! empty( $html ) ) {
+        return $html;
+    }
+    if ( is_singular( 'actividad' ) ) {
+        return $html; // deja vacío
+    }
+
+    $default_url = get_stylesheet_directory_uri() . '/assets/images/default-actividad.webp';
+    $html = '<img src="' . esc_url( $default_url ) . '" class="default-image" alt="Imagen por defecto" />';
+
+    return $html;
+}
+add_filter( 'post_thumbnail_html', 'actividad_default_thumbnail', 10, 5 );
+
+/* --------------------------------------------------------------
+ *  SHORTCODE: PROGRAMACIÓN FUTURA/PASADA
+ * -------------------------------------------------------------- */
+function euterpe_programacion_completa( $atts ) {
+	$atts = shortcode_atts(
+		array(
+			'limite' => 6,        
+			'modo'   => 'futuro',
+			'orden'  => 'ASC',
+			'paginacion' => 'true',
+		),
+		$atts,
+		'programacion_completa'
+	);
+
+	$hoy = current_time( 'Y-m-d' );
+	$hoy_num = str_replace( '-', '', $hoy );
+
+	// Comparador según modo
+	if ( $atts['modo'] === 'pasado' ) {
+		$compare = '<=';
+		$order   = 'DESC';
+	} else {
+		$compare = '>=';
+		$order   = 'ASC';
+	}
+
+	if ( strtoupper( $atts['orden'] ) === 'ASC' || strtoupper( $atts['orden'] ) === 'DESC' ) {
+		$order = strtoupper( $atts['orden'] );
+	}
+
+	// Paginación
+	$paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+
+	$args = array(
+		'post_type'      => 'actividad',
+		'posts_per_page' => intval( $atts['limite'] ),
+		'paged'          => $paged,
+		'meta_key'       => 'fecha',
+		'orderby'        => 'meta_value_num',
+		'order'          => $order,
+		'meta_query'     => array(
+			array(
+				'key'     => 'fecha',
+				'value'   => $hoy_num,
+				'compare' => $compare,
+				'type'    => 'NUMERIC',
+			),
+		),
+	);
+
+	$query = new WP_Query( $args );
+
+	if ( ! $query->have_posts() ) {
+		$mensaje = ( $atts['modo'] === 'pasado' )
+			? __( 'No hay actividades pasadas registradas.', 'euterpe' )
+			: __( 'No hay actividades programadas próximamente.', 'euterpe' );
+		return '<p>' . $mensaje . '</p>';
+	}
+
+	ob_start(); ?>
+
+	<div class="wp-block-query">
+		<ul class="wp-block-post-template lista-programacion grid-container post-overlay">
+			<?php while ( $query->have_posts() ) : $query->the_post(); ?>
+				<?php
+				$fecha_raw = trim( get_post_meta( get_the_ID(), 'fecha', true ) );
+				if ( empty( $fecha_raw ) ) continue;
+
+				$fecha_formateada = substr( $fecha_raw, 0, 4 ) . '-' . substr( $fecha_raw, 4, 2 ) . '-' . substr( $fecha_raw, 6, 2 );
+				$timestamp        = strtotime( $fecha_formateada );
+				if ( ! $timestamp ) continue;
+
+				$fecha_legible = date_i18n( 'j \d\e F Y', $timestamp );	
+				$hora          = get_post_meta( get_the_ID(), 'hora', true );
+				?>
+				<li class="wp-block-post item-programacion">
+					<figure class="wp-block-post-featured-image">
+						<a href="<?php the_permalink(); ?>">
+							<?php the_post_thumbnail( 'medium' ); ?>
+						</a>
+					</figure>
+
+					<div class="info wp-block-group">
+						<h2 class="wp-block-post-title">
+							<?php the_title(); ?>
+						</h2>
+
+						<div class="fecha-hora wp-block-group">
+							<p class="fecha"><?php echo esc_html( $fecha_legible ); ?></p>
+							<p class="hora">
+								<?php 
+									echo esc_html(
+										!empty($hora) && strtotime($hora) 
+											? date_i18n( 'g:i a', strtotime($hora) ) 
+											: 'Hora pendiente'
+									); 
+								?>
+							</p>
+						</div>
+					</div>
+				</li>
+			<?php endwhile; ?>
+		</ul>
+
+		<?php
+		if ( $atts['paginacion'] === 'true' ) :
+			$big = 999999999;
+			$total_pages = $query->max_num_pages;
+			if ( $total_pages > 1 ) :
+				$current_page = max( 1, get_query_var( 'paged' ) );
+				?>
+				<nav class="pagination wp-block-query-pagination" aria-label="Paginación">
+					<?php if ( $current_page > 1 ) : ?>
+						<a href="<?php echo get_pagenum_link( $current_page - 1 ); ?>" class="wp-block-query-pagination-previous">
+							<span class="wp-block-query-pagination-previous-arrow is-arrow-arrow" aria-hidden="true">←</span>Anteriores
+						</a>
+					<?php endif; ?>
+
+					<div class="wp-block-query-pagination-numbers">
+						<?php
+						for ( $i = 1; $i <= $total_pages; $i++ ) {
+							if ( $i == $current_page ) {
+								echo '<span aria-current="page" class="page-numbers current">' . $i . '</span>';
+							} else {
+								echo '<a class="page-numbers" href="' . get_pagenum_link( $i ) . '">' . $i . '</a>';
+							}
+						}
+						?>
+					</div>
+
+					<?php if ( $current_page < $total_pages ) : ?>
+						<a href="<?php echo get_pagenum_link( $current_page + 1 ); ?>" class="wp-block-query-pagination-next">
+							Siguientes<span class="wp-block-query-pagination-next-arrow is-arrow-arrow" aria-hidden="true">→</span>
+						</a>
+					<?php endif; ?>
+				</nav>
+			<?php endif;
+		endif; // fin del if de paginación
+		?>
+    </div>
+
+    <?php
+    wp_reset_postdata();
+    return ob_get_clean();
+}
+add_shortcode( 'programacion_completa', 'euterpe_programacion_completa' );
 
 /* --------------------------------------------------------------
  *  SHORTCODE: PROGRAMACIÓN POR MES
@@ -298,145 +463,6 @@ function mostrar_colaboradores_slider() {
     return $salida;
 }
 add_shortcode('colaboradores_slider', 'mostrar_colaboradores_slider');
-
-/* --------------------------------------------------------------
- *  SHORTCODE: PROGRAMACIÓN FUTURA/PASADA
- * -------------------------------------------------------------- */
-function euterpe_programacion_completa( $atts ) {
-	$atts = shortcode_atts(
-		array(
-			'limite' => 6,        // resultados por página
-			'modo'   => 'futuro', // futuro o pasado
-			'orden'  => 'ASC',    // orden ascendente o descendente
-		),
-		$atts,
-		'programacion_completa'
-	);
-
-	$hoy = current_time( 'Y-m-d' );
-	$hoy_num = str_replace( '-', '', $hoy );
-
-	// Comparador según modo
-	if ( $atts['modo'] === 'pasado' ) {
-		$compare = '<=';
-		$order   = 'DESC';
-	} else {
-		$compare = '>=';
-		$order   = 'ASC';
-	}
-
-	if ( strtoupper( $atts['orden'] ) === 'ASC' || strtoupper( $atts['orden'] ) === 'DESC' ) {
-		$order = strtoupper( $atts['orden'] );
-	}
-
-	// Paginación
-	$paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
-
-	$args = array(
-		'post_type'      => 'actividad',
-		'posts_per_page' => intval( $atts['limite'] ),
-		'paged'          => $paged,
-		'meta_key'       => 'fecha',
-		'orderby'        => 'meta_value_num',
-		'order'          => $order,
-		'meta_query'     => array(
-			array(
-				'key'     => 'fecha',
-				'value'   => $hoy_num,
-				'compare' => $compare,
-				'type'    => 'NUMERIC',
-			),
-		),
-	);
-
-	$query = new WP_Query( $args );
-
-	if ( ! $query->have_posts() ) {
-		$mensaje = ( $atts['modo'] === 'pasado' )
-			? __( 'No hay actividades pasadas registradas.', 'euterpe' )
-			: __( 'No hay actividades programadas próximamente.', 'euterpe' );
-		return '<p>' . $mensaje . '</p>';
-	}
-
-	ob_start(); ?>
-
-	<div class="wp-block-query">
-		<ul class="wp-block-post-template lista-programacion grid-container post-overlay">
-			<?php while ( $query->have_posts() ) : $query->the_post(); ?>
-				<?php
-				$fecha_raw = trim( get_post_meta( get_the_ID(), 'fecha', true ) );
-				if ( empty( $fecha_raw ) ) continue;
-
-				$fecha_formateada = substr( $fecha_raw, 0, 4 ) . '-' . substr( $fecha_raw, 4, 2 ) . '-' . substr( $fecha_raw, 6, 2 );
-				$timestamp        = strtotime( $fecha_formateada );
-				if ( ! $timestamp ) continue;
-
-				$fecha_legible = date_i18n( 'j \d\e F Y', $timestamp );	
-				$hora          = get_post_meta( get_the_ID(), 'hora', true );
-				?>
-				<li class="wp-block-post item-programacion">
-					<figure class="wp-block-post-featured-image">
-						<a href="<?php the_permalink(); ?>">
-							<?php the_post_thumbnail( 'medium' ); ?>
-						</a>
-					</figure>
-
-					<div class="info wp-block-group">
-						<h2 class="wp-block-post-title">
-							<?php the_title(); ?>
-						</h2>
-
-						<div class="fecha-hora wp-block-group">
-							<p class="fecha"><?php echo esc_html( $fecha_legible ); ?></p>
-							<?php if ( ! empty( $hora ) ) : ?>
-								<p class="hora"><?php echo esc_html( date_i18n( 'g:i a', strtotime( $hora ) ) ); ?></p>
-							<?php endif; ?>
-						</div>
-					</div>
-				</li>
-			<?php endwhile; ?>
-		</ul>
-
-		<?php
-		// Paginación estilo Gutenberg con flechas
-        $big = 999999999;
-          $total_pages = $query->max_num_pages;
-        if ( $total_pages > 1 ) :
-            $current_page = max( 1, get_query_var( 'paged' ) );
-            ?>
-            <nav class="pagination wp-block-query-pagination" aria-label="Paginación">
-                <?php if ( $current_page > 1 ) : ?>
-                    <a href="<?php echo get_pagenum_link( $current_page - 1 ); ?>" class="wp-block-query-pagination-previous">
-                        <span class="wp-block-query-pagination-previous-arrow is-arrow-arrow" aria-hidden="true">←</span>Anteriores
-                    </a>
-                <?php endif; ?>
-
-                <div class="wp-block-query-pagination-numbers">
-                    <?php
-                    for ( $i = 1; $i <= $total_pages; $i++ ) {
-                        if ( $i == $current_page ) {
-                            echo '<span aria-current="page" class="page-numbers current">' . $i . '</span>';
-                        } else {
-                            echo '<a class="page-numbers" href="' . get_pagenum_link( $i ) . '">' . $i . '</a>';
-                        }
-                    }
-                    ?>
-                </div>
-
-                <?php if ( $current_page < $total_pages ) : ?>
-                    <a href="<?php echo get_pagenum_link( $current_page + 1 ); ?>" class="wp-block-query-pagination-next">
-                        Siguientes<span class="wp-block-query-pagination-next-arrow is-arrow-arrow" aria-hidden="true">→</span>
-                    </a>
-                <?php endif; ?>
-            </nav>
-        <?php endif; ?>
-    </div>
-
-    <?php
-    wp_reset_postdata();
-    return ob_get_clean();
-}
-add_shortcode( 'programacion_completa', 'euterpe_programacion_completa' );
 
 
 /* --------------------------------------------------------------

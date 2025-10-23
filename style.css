@@ -901,7 +901,9 @@ ul.post-overlay {
 
 /* --- Vista tipo listado / Grid actividades --- */
 .actividades-special-column {
-  /* flex-direction: column; */
+  @media (min-width: 600px) {
+    flex-direction: column;
+  }
   @media (min-width: 1024px) {
     flex-direction: row;
   }
