@@ -35,5 +35,5 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
 
-La Nave de Euterpe is based on euterpe-nourd-font (), (C) Alvaro Quevedo, [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)
+La Nave de Euterpe is a custom block theme, (C) Alvaro Quevedo, [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)
 
