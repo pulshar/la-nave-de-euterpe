@@ -1,319 +1,305 @@
 {
-	"settings": {
-		"appearanceTools": true,
-		"color": {
-			"defaultDuotone": false,
-			"defaultGradients": false,
-			"defaultPalette": false,
-			"palette": [
-				{
-					"color": "#0E1D12",
-					"name": "Accent 1",
-					"slug": "accent-1"
-				},
-				{
-					"color": "#D69C56",
-					"name": "Accent 2",
-					"slug": "accent-2"
-				},
-				{
-					"color": "#DEF4FF",
-					"name": "Lily White",
-					"slug": "lilly-white"
-				},
-				{
-					"color": "#7c8d81",
-					"name": "Text Muted Lilly White",
-					"slug": "text-muted-lilly-white"
-				},
-				{
-					"color": "#070E0A",
-					"name": "Text Dark",
-					"slug": "text-dark"
-				},
-				{
-					"color": "#FFFFFF",
-					"name": "Blanco",
-					"slug": "white"
-				},
-				{
-					"color": "transparent",
-					"name": "Transparent",
-					"slug": "transparent"
-				}
-			]
-		},
-		"layout": {
-			"contentSize": "1200px",
-			"wideSize": "1200px"
-		},
-		"spacing": {
-			"defaultSpacingSizes": false,
-			"spacingSizes": [
-				{
-					"name": "XSmall-4",
-					"size": "4px",
-					"slug": "x-small-4"
-				},
-				{
-					"name": "XSmall-8",
-					"size": "8px",
-					"slug": "x-small-8"
-				},
-				{
-					"name": "Small",
-					"size": "clamp(.5rem, 2.5vw, 1rem)",
-					"slug": "small"
-				},
-				{
-					"name": "Medium",
-					"size": "clamp(1.5rem, 4vw, 2rem)",
-					"slug": "medium"
-				},
-				{
-					"name": "Large",
-					"size": "clamp(2rem, 5vw, 3rem)",
-					"slug": "large"
-				},
-				{
-					"name": "Extra Large",
-					"size": "clamp(3rem, 7vw, 5rem)",
-					"slug": "x-large"
-				},
-				{
-					"name": "2xl",
-					"size": "clamp(4rem, 9vw, 7rem)",
-					"slug": "xx-large"
-				},
-				{
-					"name": "3xl",
-					"size": "clamp(5rem, 12vw, 9rem)",
-					"slug": "xxx-large"
-				},
-				{
-					"name": "4xl",
-					"size": "clamp(6rem, 14vw, 13rem)",
-					"slug": "xxxx-large"
-				}
-			],
-			"units": [
-				"px",
-				"em",
-				"rem",
-				"vh",
-				"vw",
-				"%"
-			]
-		},
-		"typography": {
-			"defaultFontSizes": false,
-			"dropCap": false,
-			"fluid": true,
-			"fontFamilies": [
-				{
-					"fontFace": [
-						{
-							"fontDisplay": "swap",
-							"fontFamily": "Cormorant",
-							"fontStyle": "normal",
-							"fontWeight": "400",
-							"src": [
-								"file:./assets/fonts/cormorant/cormorant-400-normal.woff2"
-							]
-						},
-						{
-							"fontDisplay": "swap",
-							"fontFamily": "Cormorant",
-							"fontStyle": "normal",
-							"fontWeight": "500",
-							"src": [
-								"file:./assets/fonts/cormorant/cormorant-500-normal.woff2"
-							]
-						}
-					],
-					"fontFamily": "Cormorant, serif",
-					"name": "Cormorant",
-					"slug": "headings"
-				},
-				{
-					"fontFace": [
-						{
-							"fontFamily": "Inter",
-							"fontStyle": "normal",
-							"fontWeight": "400",
-							"src": [
-								"file:./assets/fonts/inter/inter-400-normal.woff2"
-							]
-						},
-						{
-							"fontFamily": "Inter",
-							"fontStyle": "normal",
-							"fontWeight": "900",
-							"src": [
-								"file:./assets/fonts/inter/inter-900-normal.woff2"
-							]
-						},
-						{
-							"fontFamily": "Inter",
-							"fontStyle": "normal",
-							"fontWeight": "300",
-							"src": [
-								"file:./assets/fonts/inter/inter-300-normal.woff2"
-							]
-						},
-						{
-							"fontFamily": "Inter",
-							"fontStyle": "normal",
-							"fontWeight": "800",
-							"src": [
-								"file:./assets/fonts/inter/inter-800-normal.woff2"
-							]
-						},
-						{
-							"fontFamily": "Inter",
-							"fontStyle": "normal",
-							"fontWeight": "700",
-							"src": [
-								"file:./assets/fonts/inter/inter-700-normal.woff2"
-							]
-						},
-						{
-							"fontFamily": "Inter",
-							"fontStyle": "normal",
-							"fontWeight": "600",
-							"src": [
-								"file:./assets/fonts/inter/inter-600-normal.woff2"
-							]
-						},
-						{
-							"fontFamily": "Inter",
-							"fontStyle": "normal",
-							"fontWeight": "500",
-							"src": [
-								"file:./assets/fonts/inter/inter-500-normal.woff2"
-							]
-						}
-					],
-					"fontFamily": "Inter, sans-serif",
-					"name": "Inter",
-					"slug": "body"
-				}
-			],
-			"fontSizes": [
-				{
-					"name": "Tiny",
-					"size": "0.875rem",
-					"slug": "tiny"
-				},
-				{
-					"fluid": {
-						"max": "1rem",
-						"min": "0.875rem"
-					},
-					"name": "Small",
-					"size": "1rem",
-					"slug": "small"
-				},
-				{
-					"fluid": {
-						"max": "1.125rem",
-						"min": "1rem"
-					},
-					"name": "Default",
-					"size": "1.125rem",
-					"slug": "default"
-				},
-				{
-					"fluid": {
-						"max": "1.25rem",
-						"min": "1.125rem"
-					},
-					"name": "Medium",
-					"size": "1.25rem",
-					"slug": "medium"
-				},
-				{
-					"fluid": {
-						"max": "2rem",
-						"min": "1.75rem"
-					},
-					"name": "Large",
-					"size": "2rem",
-					"slug": "large"
-				},
-				{
-					"fluid": {
-						"max": "2.75rem",
-						"min": "2.25rem"
-					},
-					"name": "XL",
-					"size": "2.75rem",
-					"slug": "x-large"
-				},
-				{
-					"fluid": {
-						"max": "3.75rem",
-						"min": "2.4rem"
-					},
-					"name": "XXL",
-					"size": "3.75rem",
-					"slug": "xx-large"
-				},
-				{
-					"fluid": {
-						"max": "5rem",
-						"min": "3rem"
-					},
-					"name": "Hero Display",
-					"size": "5rem",
-					"slug": "hero-display"
-				},
-				{
-					"fluid": {
-						"max": "4.5rem",
-						"min": "2rem"
-					},
-					"name": "Section Title",
-					"size": "4.5rem",
-					"slug": "section-title"
-				}
-			]
-		},
-		"useRootPaddingAwareAlignments": true
-	},
-	"styles": {
-		"color": {
-			"text": "var(--wp--preset--color--text-muted-lilly-white)"
-		},
-		"elements": {
-			"heading": {
-				"color": {
-					"text": "var(--wp--preset--color--lilly-white)"
-				},
-				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--headings)"
-				}
-			},
-			"link": {
-				"color": {
-					"text": "var(--wp--preset--color--lilly-white)"
-				}
-			}
-		},
-		"typography": {
-			"fontFamily": "var(--wp--preset--font-family--body)"
-		}
-	},
-	"templateParts": [
-		{
-			"area": "header",
-			"name": "header"
-		},
-		{
-			"area": "footer",
-			"name": "footer"
-		}
-	],
-	"version": 3,
-	"$schema": "https://schemas.wp.org/wp/6.8/theme.json"
+  "settings": {
+    "appearanceTools": true,
+    "color": {
+      "defaultDuotone": false,
+      "defaultGradients": false,
+      "defaultPalette": false,
+      "palette": [
+        {
+          "color": "#0E1D12",
+          "name": "Accent 1",
+          "slug": "accent-1"
+        },
+        {
+          "color": "#D69C56",
+          "name": "Accent 2",
+          "slug": "accent-2"
+        },
+        {
+          "color": "#DEF4FF",
+          "name": "Lily White",
+          "slug": "lilly-white"
+        },
+        {
+          "color": "#7c8d81",
+          "name": "Text Muted Lilly White",
+          "slug": "text-muted-lilly-white"
+        },
+        {
+          "color": "#070E0A",
+          "name": "Text Dark",
+          "slug": "text-dark"
+        },
+        {
+          "color": "#FFFFFF",
+          "name": "Blanco",
+          "slug": "white"
+        },
+        {
+          "color": "transparent",
+          "name": "Transparent",
+          "slug": "transparent"
+        }
+      ]
+    },
+    "layout": {
+      "contentSize": "1200px",
+      "wideSize": "1200px"
+    },
+    "spacing": {
+      "defaultSpacingSizes": false,
+      "spacingSizes": [
+        {
+          "name": "XSmall-4",
+          "size": "4px",
+          "slug": "x-small-4"
+        },
+        {
+          "name": "XSmall-8",
+          "size": "8px",
+          "slug": "x-small-8"
+        },
+        {
+          "name": "Small",
+          "size": "clamp(.5rem, 2.5vw, 1rem)",
+          "slug": "small"
+        },
+        {
+          "name": "Medium",
+          "size": "clamp(1.5rem, 4vw, 2rem)",
+          "slug": "medium"
+        },
+        {
+          "name": "Large",
+          "size": "clamp(2rem, 5vw, 3rem)",
+          "slug": "large"
+        },
+        {
+          "name": "Extra Large",
+          "size": "clamp(3rem, 7vw, 5rem)",
+          "slug": "x-large"
+        },
+        {
+          "name": "2xl",
+          "size": "clamp(4rem, 9vw, 7rem)",
+          "slug": "xx-large"
+        },
+        {
+          "name": "3xl",
+          "size": "clamp(5rem, 12vw, 9rem)",
+          "slug": "xxx-large"
+        },
+        {
+          "name": "4xl",
+          "size": "clamp(6rem, 14vw, 13rem)",
+          "slug": "xxxx-large"
+        }
+      ],
+      "units": ["px", "em", "rem", "vh", "vw", "%"]
+    },
+    "typography": {
+      "defaultFontSizes": false,
+      "dropCap": false,
+      "fluid": true,
+      "fontFamilies": [
+        {
+          "fontFace": [
+            {
+              "fontDisplay": "swap",
+              "fontFamily": "Cormorant",
+              "fontStyle": "normal",
+              "fontWeight": "400",
+              "src": [
+                "file:./assets/fonts/cormorant/cormorant-400-normal.woff2"
+              ]
+            },
+            {
+              "fontDisplay": "swap",
+              "fontFamily": "Cormorant",
+              "fontStyle": "normal",
+              "fontWeight": "500",
+              "src": [
+                "file:./assets/fonts/cormorant/cormorant-500-normal.woff2"
+              ]
+            }
+          ],
+          "fontFamily": "Cormorant, serif",
+          "name": "Cormorant",
+          "slug": "headings"
+        },
+        {
+          "fontFace": [
+            {
+              "fontDisplay": "swap",
+              "fontFamily": "Inter",
+              "fontStyle": "normal",
+              "fontWeight": "400",
+              "src": ["file:./assets/fonts/inter/inter-400-normal.woff2"]
+            },
+            {
+              "fontDisplay": "swap",
+              "fontFamily": "Inter",
+              "fontStyle": "normal",
+              "fontWeight": "900",
+              "src": ["file:./assets/fonts/inter/inter-900-normal.woff2"]
+            },
+            {
+              "fontDisplay": "swap",
+              "fontFamily": "Inter",
+              "fontStyle": "normal",
+              "fontWeight": "300",
+              "src": ["file:./assets/fonts/inter/inter-300-normal.woff2"]
+            },
+            {
+              "fontDisplay": "swap",
+              "fontFamily": "Inter",
+              "fontStyle": "normal",
+              "fontWeight": "800",
+              "src": ["file:./assets/fonts/inter/inter-800-normal.woff2"]
+            },
+            {
+              "fontDisplay": "swap",
+              "fontFamily": "Inter",
+              "fontStyle": "normal",
+              "fontWeight": "700",
+              "src": ["file:./assets/fonts/inter/inter-700-normal.woff2"]
+            },
+            {
+              "fontDisplay": "swap",
+              "fontFamily": "Inter",
+              "fontStyle": "normal",
+              "fontWeight": "600",
+              "src": ["file:./assets/fonts/inter/inter-600-normal.woff2"]
+            },
+            {
+              "fontDisplay": "swap",
+              "fontFamily": "Inter",
+              "fontStyle": "normal",
+              "fontWeight": "500",
+              "src": ["file:./assets/fonts/inter/inter-500-normal.woff2"]
+            }
+          ],
+          "fontFamily": "Inter, sans-serif",
+          "name": "Inter",
+          "slug": "body"
+        }
+      ],
+      "fontSizes": [
+        {
+          "name": "Tiny",
+          "size": "0.875rem",
+          "slug": "tiny"
+        },
+        {
+          "fluid": {
+            "max": "1rem",
+            "min": "0.875rem"
+          },
+          "name": "Small",
+          "size": "1rem",
+          "slug": "small"
+        },
+        {
+          "fluid": {
+            "max": "1.125rem",
+            "min": "1rem"
+          },
+          "name": "Default",
+          "size": "1.125rem",
+          "slug": "default"
+        },
+        {
+          "fluid": {
+            "max": "1.25rem",
+            "min": "1.125rem"
+          },
+          "name": "Medium",
+          "size": "1.25rem",
+          "slug": "medium"
+        },
+        {
+          "fluid": {
+            "max": "2rem",
+            "min": "1.75rem"
+          },
+          "name": "Large",
+          "size": "2rem",
+          "slug": "large"
+        },
+        {
+          "fluid": {
+            "max": "2.75rem",
+            "min": "2.25rem"
+          },
+          "name": "XL",
+          "size": "2.75rem",
+          "slug": "x-large"
+        },
+        {
+          "fluid": {
+            "max": "3.75rem",
+            "min": "2.4rem"
+          },
+          "name": "XXL",
+          "size": "3.75rem",
+          "slug": "xx-large"
+        },
+        {
+          "fluid": {
+            "max": "5rem",
+            "min": "3rem"
+          },
+          "name": "Hero Display",
+          "size": "5rem",
+          "slug": "hero-display"
+        },
+        {
+          "fluid": {
+            "max": "4.5rem",
+            "min": "2rem"
+          },
+          "name": "Section Title",
+          "size": "4.5rem",
+          "slug": "section-title"
+        }
+      ]
+    },
+    "useRootPaddingAwareAlignments": true
+  },
+  "styles": {
+    "color": {
+      "text": "var(--wp--preset--color--text-muted-lilly-white)"
+    },
+    "elements": {
+      "heading": {
+        "color": {
+          "text": "var(--wp--preset--color--lilly-white)"
+        },
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--headings)"
+        }
+      },
+      "link": {
+        "color": {
+          "text": "var(--wp--preset--color--lilly-white)"
+        }
+      }
+    },
+    "typography": {
+      "fontFamily": "var(--wp--preset--font-family--body)"
+    }
+  },
+  "templateParts": [
+    {
+      "area": "header",
+      "name": "header"
+    },
+    {
+      "area": "footer",
+      "name": "footer"
+    }
+  ],
+  "version": 3,
+  "$schema": "https://schemas.wp.org/wp/6.8/theme.json"
 }

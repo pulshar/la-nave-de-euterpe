@@ -8,24 +8,28 @@
         {
           "fontFace": [
             {
+              "fontDisplay": "swap",
               "fontFamily": "Nourd",
               "fontStyle": "Regular",
               "fontWeight": "400",
               "src": ["file:./assets/fonts/nourd/nourd_regular.ttf"]
             },
             {
+              "fontDisplay": "swap",
               "fontFamily": "Nourd",
               "fontStyle": "Medium",
               "fontWeight": "500",
               "src": ["file:./assets/fonts/nourd/nourd_medium.ttf"]
             },
             {
+              "fontDisplay": "swap",
               "fontFamily": "Nourd",
               "fontStyle": "Semibold",
               "fontWeight": "600",
               "src": ["file:./assets/fonts/nourd/nourd_semi_bold.ttf"]
             },
             {
+              "fontDisplay": "swap",
               "fontFamily": "Nourd",
               "fontStyle": "Bold",
               "fontWeight": "700",
@@ -39,42 +43,49 @@
         {
           "fontFace": [
             {
+              "fontDisplay": "swap",
               "fontFamily": "Inter",
               "fontStyle": "normal",
               "fontWeight": "400",
               "src": ["file:./assets/fonts/inter/inter-400-normal.woff2"]
             },
             {
+              "fontDisplay": "swap",
               "fontFamily": "Inter",
               "fontStyle": "normal",
               "fontWeight": "900",
               "src": ["file:./assets/fonts/inter/inter-900-normal.woff2"]
             },
             {
+              "fontDisplay": "swap",
               "fontFamily": "Inter",
               "fontStyle": "normal",
               "fontWeight": "300",
               "src": ["file:./assets/fonts/inter/inter-300-normal.woff2"]
             },
             {
+              "fontDisplay": "swap",
               "fontFamily": "Inter",
               "fontStyle": "normal",
               "fontWeight": "800",
               "src": ["file:./assets/fonts/inter/inter-800-normal.woff2"]
             },
             {
+              "fontDisplay": "swap",
               "fontFamily": "Inter",
               "fontStyle": "normal",
               "fontWeight": "700",
               "src": ["file:./assets/fonts/inter/inter-700-normal.woff2"]
             },
             {
+              "fontDisplay": "swap",
               "fontFamily": "Inter",
               "fontStyle": "normal",
               "fontWeight": "600",
               "src": ["file:./assets/fonts/inter/inter-600-normal.woff2"]
             },
             {
+              "fontDisplay": "swap",
               "fontFamily": "Inter",
               "fontStyle": "normal",
               "fontWeight": "500",
