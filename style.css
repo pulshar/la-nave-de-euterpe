@@ -333,6 +333,7 @@ a:where(:not(.wp-element-button):not(.post-noticias a)) {
   box-shadow: 0px 5px 20px 3px
     color-mix(in srgb, var(--wp--preset--color--lilly-white) 10%, transparent);
   input {
+    width: 100%;
     padding: 0.75rem;
     border-radius: 3px;
     border: 1px solid
