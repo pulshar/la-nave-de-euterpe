@@ -441,7 +441,6 @@ a:where(:not(.wp-element-button):not(.post-noticias a)) {
   }
 }
 .breadcrumbs {
-  text-transform: capitalize;
   font-size: var(--wp--preset--font-size--tiny);
   font-weight: 400;
   line-height: 1.5;
@@ -458,7 +457,15 @@ a:where(:not(.wp-element-button):not(.post-noticias a)) {
     }
   }
   .post-post.current-item {
-    display: none;
+    display: inline-block;
+     max-width: 24ch;
+    @media (max-width: 480px) {
+        max-width: 16ch;
+    }
+    white-space: nowrap;  
+    overflow: hidden;         
+    text-overflow: ellipsis;  
+    vertical-align: bottom;   
   }
 }
 
