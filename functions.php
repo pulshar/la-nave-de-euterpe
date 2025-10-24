@@ -485,21 +485,43 @@ function euterpe_limit_editor_admin_menu() {
 }
 add_action( 'admin_menu', 'euterpe_limit_editor_admin_menu', 999 );
 
-function mytheme_preload_fonts() {
-    $fonts = [
-        '/assets/fonts/cormorant/cormorant-400-normal.woff2',
-        '/assets/fonts/cormorant/cormorant-500-normal.woff2'
-    ];
 
-    foreach ( $fonts as $font ) {
-        printf(
-            '<link rel="preload" href="%s%s" as="font" type="font/woff2" crossorigin>' . "\n",
-            get_template_directory_uri(),
-            esc_attr( $font )
-        );
+/* --------------------------------------------------------------
+ *  PRELOAD FONTS FROM THEME.JSON
+ * -------------------------------------------------------------- */
+function mytheme_preload_fonts() {
+    $theme_json = wp_get_global_settings( [ 'typography', 'fontFamilies' ] );
+
+    if ( empty( $theme_json ) ) {
+        return;
+    }
+
+    foreach ( $theme_json as $font_family ) {
+        if ( empty( $font_family['fontFace'] ) ) {
+            continue;
+        }
+
+        foreach ( $font_family['fontFace'] as $face ) {
+            if ( empty( $face['src'] ) ) {
+                continue;
+            }
+
+            foreach ( $face['src'] as $src ) {
+                if ( str_starts_with( $src, 'file:' ) ) {
+                    $src_path = str_replace( 'file:./', '/', $src );
+
+                    printf(
+                        '<link rel="preload" href="%s%s" as="font" type="font/woff2" crossorigin>' . "\n",
+                        esc_url( get_template_directory_uri() ),
+                        esc_attr( $src_path )
+                    );
+                }
+            }
+        }
     }
 }
-add_action( 'wp_head', 'mytheme_preload_fonts' );
+add_action( 'wp_head', 'mytheme_preload_fonts', 5 );
+
 /* --------------------------------------------------------------
  *  SHORTCODE: CURRENT YEAR
  * -------------------------------------------------------------- */
