@@ -7,27 +7,27 @@
       "defaultPalette": false,
       "palette": [
         {
-          "color": "#0E1D12",
+          "color": "#fdfdfc",
           "name": "Accent 1",
           "slug": "accent-1"
         },
         {
-          "color": "#D69C56",
+          "color": "#BE5904",
           "name": "Accent 2",
           "slug": "accent-2"
         },
         {
-          "color": "#DEF4FF",
+          "color": "#1C2321",
           "name": "Lily White",
           "slug": "lilly-white"
         },
         {
-          "color": "#7c8d81",
+          "color": "#686f78",
           "name": "Text Muted Lilly White",
           "slug": "text-muted-lilly-white"
         },
         {
-          "color": "#070E0A",
+          "color": "#1C2321",
           "name": "Text Dark",
           "slug": "text-dark"
         },
