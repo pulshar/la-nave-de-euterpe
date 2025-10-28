@@ -436,7 +436,7 @@ function mostrar_colaboradores_slider() {
         return '<p>No hay colaboradores disponibles.</p>';
     }
 
-    $salida = '<div class="swiper"><div class="swiper-wrapper">';
+    $salida = '<div class="swiper colaboradores-swiper"><div class="swiper-wrapper">';
 
     while ($query->have_posts()) {
         $query->the_post();
@@ -448,7 +448,7 @@ function mostrar_colaboradores_slider() {
         // Cada colaborador como slide
         $salida .= '<div class="swiper-slide colaborador-card"><a href="' . $enlace . '">';
         if ($imagen) {
-            $salida .= '<figure class="colaborador-figura">' . $imagen . '</figure>';
+            $salida .= '<figure class="colaborador-figura">' . $imagen . '</figure><div class="swiper-lazy-preloader"></div>';
         }
         $salida .= '<div class="title-wrapper"><h3>' . esc_html($nombre) . '</h3></div>';
         $salida .= '</div></a>';
