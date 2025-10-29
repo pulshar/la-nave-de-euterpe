@@ -37,20 +37,25 @@ add_action( 'after_setup_theme', 'euterpe_setup' );
  *  ENQUEUE SCRIPTS & STYLES
  * -------------------------------------------------------------- */
 function euterpe_enqueue_scripts() {
+	
+		// Lenis
+		wp_enqueue_script(
+			'lenis',
+			'https://cdn.jsdelivr.net/npm/@studio-freight/lenis@latest/bundled/lenis.min.js',
+			array(),
+			null,
+			true
+		);
 
 	// Swiper
 	wp_enqueue_style( 'swiper-css', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css' );
 	wp_enqueue_script( 'swiper-js', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', array(), null, true );
 
-	// Lenis
-	wp_enqueue_script(
-		'lenis',
-		'https://cdn.jsdelivr.net/npm/@studio-freight/lenis@latest/bundled/lenis.min.js',
-		array(),
-		null,
-		true
-	);
-
+	// Fancybox (solo en páginas que lo requieran)
+  	 if ( is_singular() && ( has_block( 'core/image' ) || has_block( 'core/gallery' ) ) ) {
+        wp_enqueue_style('fancybox-css', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css');
+        wp_enqueue_script('fancybox-js', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js', array(), null, true);
+    }
 	// Estilos principales del tema
 	wp_enqueue_style(
 		'euterpe-style',

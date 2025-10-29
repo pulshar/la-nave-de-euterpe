@@ -169,6 +169,43 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Selecciona todas las imágenes dentro del contenido del post para FancyBox
+
+  // --- Imágenes sueltas ---
+  const images = document.querySelectorAll(
+    ".wp-block-image img, .entry-content img"
+  );
+  if (images.length > 0) {
+    images.forEach((img) => {
+      const caption = img.getAttribute("alt") || ""; // cogemos alt como caption
+      const link = img.closest("a");
+      if (link) {
+        link.setAttribute("data-fancybox", "gallery");
+        link.setAttribute("data-caption", caption);
+      } else {
+        const wrapper = document.createElement("a");
+        wrapper.href = img.src;
+        wrapper.setAttribute("data-fancybox", "gallery");
+        wrapper.setAttribute("data-caption", caption);
+        img.parentNode.insertBefore(wrapper, img);
+        wrapper.appendChild(img);
+      }
+    });
+  }
+
+  // --- Imágenes dentro de bloques Gallery ---
+  const galleries = document.querySelectorAll(".wp-block-gallery a img");
+  if (galleries.length > 0) {
+    galleries.forEach((img) => {
+      const caption = img.getAttribute("alt") || "";
+      const link = img.closest("a");
+      if (link) {
+        link.setAttribute("data-fancybox", "gallery");
+        link.setAttribute("data-caption", caption);
+      }
+    });
+  }
+
   // --- Accordion ---
   document.querySelectorAll(".accordion-header").forEach((header) => {
     header.addEventListener("click", () => {
