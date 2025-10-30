@@ -1356,6 +1356,9 @@ ul.post-overlay {
       color: var(--wp--preset--color--lilly-white);
     }
   }
+  .fancybox__thumbs .carousel__slide .fancybox__thumb::after {
+    border-width: 0;
+  }
 }
 
 .carousel__button {
