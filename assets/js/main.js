@@ -30,13 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
             });
           },
           {
-            threshold: 0.1, // Detecta con solo un 5% visible
+            threshold: 0.1,
           }
         );
 
         sections.forEach((section) => observer.observe(section));
       } else {
-        // Fallback: si no hay soporte, muestra todo
         sections.forEach((section) => section.classList.add("in-view"));
       }   
     }

@@ -545,6 +545,9 @@ blockquote cite {
   align-items: center;
   justify-content: space-between;
   gap: var(--wp--preset--spacing--medium);
+  @media (max-width: 600px) {
+    gap: var(--wp--preset--spacing--x-small-4);
+  }
   border-top: 1px solid
     color-mix(
       in srgb,
@@ -618,9 +621,17 @@ blockquote cite {
           transparent
         );
       }
-      @media (max-width: 599px) {
-        display: none;
-      }
+    }
+  }
+  @media (max-width: 600px) {
+    .wp-block-query-pagination-previous,
+    .wp-block-query-pagination-next {
+      font-size: 0;
+    }
+
+    .wp-block-query-pagination-previous .is-arrow-arrow,
+    .wp-block-query-pagination-next .is-arrow-arrow {
+      font-size: 1.2rem;
     }
   }
 }
@@ -757,6 +768,7 @@ h4 {
   .col-left {
     z-index: 2;
     h1 {
+      /* font-family: var(--wp--preset--font-family--brand-font); */
       font-weight: 500;
       text-shadow: 0px 0px 50px var(--wp--preset--color--accent-1),
         0px 0px 50px var(--wp--preset--color--accent-1);
@@ -981,12 +993,12 @@ ul.post-overlay {
       var(--wp--preset--color--text-muted-lilly-white) 40%,
       transparent
     );
-  &.view-grid,
-  &.view-list {
-    animation: slideUp 0.5s ease forwards;
+  &.view-grid {
+    animation: slideUpGrid 0.5s ease forwards;
   }
 
   &.view-list {
+    animation: slideUpList 0.5s ease forwards;
     ul {
       display: flex;
       flex-direction: column;
@@ -1070,6 +1082,7 @@ ul.post-overlay {
     transform: translateY(0);
   }
 }
+
 /* --- Botones --- */
 .view-controls {
   display: flex;
@@ -1612,7 +1625,7 @@ ul.post-overlay {
   ul {
     margin-bottom: 2.4rem;
     padding: 0;
-    padding-left: 1rem;
+    padding-left: 0;
     list-style: none;
   }
   li {
