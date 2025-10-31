@@ -15,25 +15,30 @@ document.addEventListener("DOMContentLoaded", () => {
     if (sections.length) {
       sections.forEach((section) => {
         section.querySelectorAll(":scope > *").forEach((el, i) => {
-          el.style.transitionDelay = `${i * 100}ms`;
+          el.style.transitionDelay = `${i * 80}ms`;
         });
       });
 
       if ("IntersectionObserver" in window) {
         const observer = new IntersectionObserver(
-          (entries) => {
+          (entries, obs) => {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
                 entry.target.classList.add("in-view");
-                observer.unobserve(entry.target);
+                obs.unobserve(entry.target);
               }
             });
           },
-          { threshold: 0.2 }
+          {
+            threshold: 0.1, // Detecta con solo un 5% visible
+          }
         );
 
         sections.forEach((section) => observer.observe(section));
-      }
+      } else {
+        // Fallback: si no hay soporte, muestra todo
+        sections.forEach((section) => section.classList.add("in-view"));
+      }   
     }
 
     // --- HEADER — sincronizado con Lenis ---
