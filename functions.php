@@ -401,7 +401,7 @@ function mostrar_programacion_por_mes( $atts ) {
 			$salida .= '<li class="item-programacion">';
 			$salida .= '<figure><a href="' . esc_url( get_permalink() ) . '">' . get_the_post_thumbnail( get_the_ID(), 'medium' ) . '</a></figure>';
 			$salida .= '<div class="info">';
-			$salida .= '<h3>' . esc_html( get_the_title() ) . '</h3>';
+			$salida .= '<h2>' . esc_html( get_the_title() ) . '</h2>';
 			$salida .= '<div class="fecha-hora"><p class="fecha">' . esc_html( $fecha_legible ) . '</p>';
 			if ( ! empty( $hora ) ) {
 				$salida .= '<p class="hora">' . esc_html( date_i18n( 'g:i a', strtotime( $hora ) ) ) . '</p>';
