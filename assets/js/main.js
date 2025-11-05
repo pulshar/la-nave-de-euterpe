@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sections.forEach((section) => observer.observe(section));
       } else {
         sections.forEach((section) => section.classList.add("in-view"));
-      }   
+      }
     }
 
     // --- HEADER — sincronizado con Lenis ---
@@ -139,20 +139,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const heroSlider = document.querySelector(".hero-swiper");
   if (heroSlider) {
     new Swiper(".hero-swiper", {
-      slidesPerView: 1,
-      spaceBetween: 0,
+      slidesPerView: 2,
+      centeredSlides: true,
+      spaceBetween: 24,
       pagination: { el: ".swiper-pagination", clickable: true },
-      navigation: false,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
       autoplay: { delay: 5000 },
-      speed: 1200,
+      speed: 600,
       loop: true,
-      effect: "fade",
+      breakpoints: {
+        320: { slidesPerView: 1 },
+        560: { slidesPerView: 2 },
+      },
     });
   }
   const colaboradoresSlider = document.querySelector(".colaboradores-swiper");
   if (colaboradoresSlider) {
     new Swiper(".colaboradores-swiper", {
-      slidesPerView: 5,
+      slidesPerView: 6,
       spaceBetween: 24,
       pagination: { el: ".swiper-pagination", dynamicBullets: true },
       dynamicBullets: true,
@@ -164,11 +171,12 @@ document.addEventListener("DOMContentLoaded", () => {
         momentumVelocityRatio: 0.6,
       },
       breakpoints: {
-        320: { slidesPerView: 2 },
+        320: { slidesPerView: 1 },
         480: { slidesPerView: 2 },
-        768: { slidesPerView: 3 },
-        1024: { slidesPerView: 4 },
-        1200: { slidesPerView: 5 },
+        640: { slidesPerView: 3 },
+        768: { slidesPerView: 4 },
+        1024: { slidesPerView: 5 },
+        1200: { slidesPerView: 6 },
       },
     });
   }
