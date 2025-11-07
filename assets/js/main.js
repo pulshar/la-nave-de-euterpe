@@ -35,6 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         sections.forEach((section) => observer.observe(section));
+        sections.forEach((section) => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            section.classList.add("in-view");
+          }
+        });
       } else {
         sections.forEach((section) => section.classList.add("in-view"));
       }

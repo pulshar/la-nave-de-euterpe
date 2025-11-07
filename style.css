@@ -117,7 +117,10 @@ body .menu-principal {
   }
 }
 .wp-block-navigation__responsive-dialog li {
-  font-size: var(--wp--preset--font-size--medium) !important;
+  font-size: clamp(1.5rem, 1.5rem + ((1vw - 0.2rem) * 0.313), 2rem) !important;
+  .icon-container {
+    width: 100px !important;
+  }
 }
 /* Cambio de comportamiento en pantallas >= 880px */
 @media (min-width: 880px) {
@@ -139,10 +142,6 @@ body .menu-principal {
   }
   .wp-block-navigation__responsive-dialog li {
     font-size: initial !important;
-  }
-  /* Utilidades para mostrar/ocultar elementos según dispositivo */
-  .hide-desktop {
-    display: none;
   }
 }
 
@@ -172,9 +171,27 @@ a:where(:not(.wp-element-button):not(.post-noticias a)) {
 }
 /* Visibilidad móvil por defecto */
 .hide-mobile {
-  display: none;
+  display: none !important;
   @media (min-width: 880px) {
-    display: block;
+    display: flex !important;
+  }
+}
+.hide-desktop {
+  display: flex !important;
+  @media (min-width: 880px) {
+    display: none !important;
+  }
+}
+.hide-mobile-1024 {
+  display: none !important;
+  @media (min-width: 1024px) {
+    display: flex !important;
+  }
+}
+.hide-desktop-1024 {
+  display: flex !important;
+  @media (min-width: 1024px) {
+    display: none !important;
   }
 }
 .width-65 {
@@ -550,7 +567,7 @@ blockquote cite {
     );
   .is-arrow-arrow {
     color: var(--wp--preset--color--accent-2);
-    transition: all 0.25s var(--ease-out-back);
+    transition: transform 0.25s var(--ease-out-back);
     display: inline-block;
   }
   .wp-block-query-pagination-previous-arrow {
@@ -631,7 +648,7 @@ blockquote cite {
 }
 
 .custom-form {
-  max-width: 620px;
+  max-width: 700px;
   padding-block-start: var(--wp--preset--spacing--large) !important;
   border-top: 1px solid
     color-mix(
@@ -695,9 +712,6 @@ blockquote cite {
       background-color: var(--wp--preset--color--accent-2) !important;
       opacity: 1 !important;
       color: var(--wp--preset--color--accent-1) !important;
-      [data-scheme="dark"] & {
-        color: var(--wp--preset--color--lilly-white) !important;
-      }
     }
   }
 }
@@ -755,6 +769,11 @@ h4 {
     h1 {
       /* font-family: var(--wp--preset--font-family--brand-font); */
       text-transform: uppercase;
+      font-size: clamp(
+        2.6rem,
+        2.6rem + ((1vw - 0.2rem) * 3.125),
+        4.5rem
+      ) !important;
     }
 
     .intro {
@@ -827,7 +846,7 @@ h4 {
   }
   .read-more-btn {
     svg {
-      transition: all 0.25s var(--ease-out-back);
+      transition: transform 0.25s var(--ease-out-back);
     }
   }
 
@@ -856,7 +875,16 @@ h4 {
     font-family: var(--wp--preset--font-family--body);
   }
 }
-
+.btn-ver-mas {
+  margin-block-start: var(--wp--preset--spacing--small);
+  padding-block-start: var(--wp--preset--spacing--large);
+  border-top: 1px solid
+    color-mix(
+      in srgb,
+      var(--wp--preset--color--text-muted-lilly-white) 40%,
+      transparent
+    );
+}
 /* Reset padding/margin en overlays */
 ul.post-overlay {
   padding: 0;
@@ -1170,10 +1198,12 @@ ul.post-overlay {
   }
 }
 .addtoany_content {
-  margin: var(--wp--preset--spacing--x-large) 0 0 !important;
+  margin: var(--wp--preset--spacing--large) 0 0 !important;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  @media (min-width: 880px) {
+    justify-content: flex-end;
+  }
   gap: var(--wp--preset--spacing--x-small-8);
   .addtoany_header {
     margin: 0;
@@ -1359,13 +1389,17 @@ ul.post-overlay {
     }
   }
   .swiper-pagination {
-    bottom: 12px !important;
+    bottom: 8px !important;
     display: block;
-    @media (min-width: 880px) {
+    @media (min-width: 768px) {
       display: none;
     }
+    .swiper-pagination-bullet {
+      background: color-mix(in srgb, #ffffff 15%, transparent);
+      opacity: 1;
+    }
     .swiper-pagination-bullet-active {
-      background: var(--wp--preset--color--lilly-white);
+      background: color-mix(in srgb, #ffffff 50%, transparent);
     }
   }
   .swiper-button-next,
@@ -1474,7 +1508,7 @@ ul.post-overlay {
    =========================================================== */
 .see-more-btn {
   img {
-    transition: all 0.25s var(--ease-out-back);
+    transition: transform 0.25s var(--ease-out-back);
   }
   &:hover {
     a {
@@ -1505,7 +1539,18 @@ ul.post-overlay {
    PROGRAMACIÓN MENSUAL (lista de actividades)
    =========================================================== */
 .programacion-mensual {
+  .mes-programacion {
+    font-family: var(--wp--preset--font-family--body);
+    text-transform: uppercase;
+    font-size: var(--wp--preset--font-size--medium);
+    margin-block-start: 0;
+    color: var(--wp--preset--color--text-muted-lilly-white);
+    font-weight: 400;
+  }
   &.completa {
+    .mes-programacion {
+    font-size: 1.5rem;
+  }
     .mes-wrapper {
       padding-block: var(--wp--preset--spacing--large);
       border-top: 1px solid
@@ -1514,14 +1559,9 @@ ul.post-overlay {
           var(--wp--preset--color--text-muted-lilly-white) 40%,
           transparent
         );
-    }
-    .mes-programacion {
-      font-family: var(--wp--preset--font-family--body);
-      text-transform: uppercase;
-      font-size: var(--wp--preset--font-size--medium);
-      margin-block-start: 0;
-      color: var(--wp--preset--color--lilly-white);
-      font-weight: 400;
+      &:last-child {
+        padding-block-end: 0;
+      }
     }
   }
 
@@ -1578,14 +1618,38 @@ ul.post-overlay {
         }
       }
     }
+  }
+}
 
-    .mes-programacion {
-      font-family: var(--wp--preset--font-family--body);
-      text-transform: uppercase;
-      font-size: var(--wp--preset--font-size--medium);
-      margin-block-start: 0;
-      color: var(--wp--preset--color--text-muted-lilly-white);
-      font-weight: 400;
+.view-list {
+  .programacion-mensual {
+    &.completa {
+      .mes-wrapper {
+        padding-block: var(--wp--preset--spacing--medium);
+        border-top: 0;
+        &:first-child {
+          padding-block-start: 0;
+        }
+        &:last-child {
+          padding-block-end: 0;
+        }
+      }
+    }
+  }
+}
+.view-grid {
+  .programacion-mensual {
+    &.completa {
+      .grid-container {
+        grid-template-columns: repeat(auto-fill, minmax(min(18rem, 100%), 1fr));
+        @media (min-width: 600px) {
+          grid-template-columns: repeat(
+            auto-fill,
+            minmax(min(22rem, 100%), 1fr)
+          );
+        }
+        gap: var(--wp--preset--spacing--medium);
+      }
     }
   }
 }
@@ -1914,9 +1978,26 @@ a {
 }
 
 .wp-block-button.is-style-secondary-outline .wp-block-button__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wp--preset--spacing--x-small-8);
   background-color: transparent;
   border: 2px solid var(--wp--preset--color--accent-2);
   color: var(--wp--preset--color--lilly-white);
+  &::after {
+    content: "";
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='m14.5 6.5-1 1 3.7 3.7H4v1.6h13.2l-3.7 3.7 1 1 5.6-5.5z'/></svg>")
+      no-repeat center;
+    mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='m14.5 6.5-1 1 3.7 3.7H4v1.6h13.2l-3.7 3.7 1 1 5.6-5.5z'/></svg>")
+      no-repeat center;
+    background-size: contain;
+    transition: transform 0.35s var(--ease-out-back);
+  }
 }
 
 /* Ajuste de padding según tamaño de fuente (botones) */
@@ -1948,6 +2029,12 @@ a {
 .wp-block-button.is-style-secondary-outline .wp-block-button__link:hover {
   background-color: var(--wp--preset--color--accent-2);
   color: var(--wp--preset--color--white);
+  [data-scheme="dark"] & {
+    color: var(--wp--preset--color--accent-1);
+  }
+  &::after {
+    transform: translateX(8px);
+  }
 }
 .has-cormorant-font-family {
   letter-spacing: 1px;

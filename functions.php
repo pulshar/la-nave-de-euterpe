@@ -418,7 +418,7 @@ function mostrar_programacion_por_mes( $atts ) {
 
 	wp_reset_postdata();
 
-	$salida .= '</ul>';
+	$salida .= '</ul></div>';  // cierra el último mes-wrapper correctamente
 
 	return '<div class="programacion-mensual ' . esc_attr( $atts['tipo'] ) . '">' . $salida . '</div>';
 }
