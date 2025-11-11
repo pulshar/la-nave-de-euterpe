@@ -12,9 +12,9 @@
 function euterpe_login_custom_css() {
 	wp_enqueue_style(
 		'euterpe-login',
-		get_stylesheet_directory_uri() . '/assets/css/login.css',
+		get_stylesheet_directory_uri() . '/assets/css/login.min.css',
 		array(),
-		filemtime( get_stylesheet_directory() . '/assets/css/login.css' )
+		filemtime( get_stylesheet_directory() . '/assets/css/login.min.css' )
 	);
 }
 add_action( 'login_enqueue_scripts', 'euterpe_login_custom_css' );
@@ -25,7 +25,7 @@ add_action( 'login_enqueue_scripts', 'euterpe_login_custom_css' );
 function euterpe_setup() {
 
 	// Estilos del editor (usa el CSS principal)
-	add_editor_style( array( 'style.css' ) );
+	add_editor_style( array( 'style.min.css' ) );
 
 	// Quitar patrones por defecto de WordPress
 	remove_theme_support( 'core-block-patterns' );
@@ -56,20 +56,26 @@ function euterpe_enqueue_scripts() {
         wp_enqueue_style('fancybox-css', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css');
         wp_enqueue_script('fancybox-js', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js', array(), null, true);
     }
+	
 	// Estilos principales del tema
-	wp_enqueue_style(
-		'euterpe-style',
-		get_stylesheet_uri(),
-		array(),
-		filemtime( get_stylesheet_directory() . '/style.css' )
-	);
+	// Quitar el CSS original del tema
+    wp_dequeue_style('euterpe-style');
+    wp_deregister_style('euterpe-style');
+
+    // Registrar tu CSS minificado
+    wp_enqueue_style(
+        'euterpe-style',
+        get_stylesheet_directory_uri() . '/style.min.css', // ruta al minificado
+        array(), 
+        filemtime(get_stylesheet_directory() . '/style.min.css')
+    );
 
 	// Script principal dependiente de Swiper y Lenis
 	wp_enqueue_script(
 		'euterpe-main',
-		get_stylesheet_directory_uri() . '/assets/js/main.js',
+		get_stylesheet_directory_uri() . '/assets/js/main.min.js',
 		array( 'swiper-js', 'lenis' ),
-		filemtime( get_stylesheet_directory() . '/assets/js/main.js' ),
+		filemtime( get_stylesheet_directory() . '/assets/js/main.min.js' ),
 		true
 	);
 }

@@ -1,0 +1,29 @@
+{
+  "name": "la-nave-de-euterpe",
+  "version": "1.0.0",
+  "scripts": {
+    "build:css:assets": "postcss assets/css/login.css -o assets/css/login.min.css",
+    "build:css:root": "postcss style.css -o style.min.css",
+    "build:js": "esbuild assets/js/main.js --bundle --minify --outfile=assets/js/main.min.js",
+    "build": "npm run build:css:assets && npm run build:css:root && npm run build:js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pulshar/la-nave-de-euterpe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pulshar/la-nave-de-euterpe/issues"
+  },
+  "homepage": "https://github.com/pulshar/la-nave-de-euterpe#readme",
+  "description": "",
+  "devDependencies": {
+    "autoprefixer": "^10.4.22",
+    "cssnano": "^7.1.2",
+    "esbuild": "^0.27.0",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1"
+  }
+}

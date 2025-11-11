@@ -1,0 +1,30 @@
+# ----------------------------------------
+# NODE / BUILD TOOLS
+# ----------------------------------------
+node_modules/
+npm-debug.log*
+package-lock.json
+yarn.lock
+.DS_Store
+.vscode/
+dist/
+build/
+*.log
+
+# ----------------------------------------
+# VITE / WEBPACK / OTHER BUILDS
+# ----------------------------------------
+assets/build/
+assets/dist/
+*.map
+
+# ----------------------------------------
+# SYSTEM FILES
+# ----------------------------------------
+Thumbs.db
+.DS_Store
+.idea/
+*.bak
+*.tmp
+*.swp
+
