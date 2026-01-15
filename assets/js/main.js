@@ -95,11 +95,16 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Vista grid/list ---
   const wrapper = document.querySelector(".actividades-wrapper");
   const buttons = document.querySelectorAll(".view-btn");
+  const progHistorica = document.querySelector(".programacion-historica");
 
   if (wrapper && buttons.length) {
-    const savedView = localStorage.getItem("actividades-view") || "view-grid";
+    const savedView = localStorage.getItem("actividades-view") || "view-list";
     wrapper.classList.remove("view-grid", "view-list");
     wrapper.classList.add(savedView);
+    if (progHistorica) {
+      progHistorica.classList.remove("view-grid", "view-list");
+      progHistorica.classList.add(savedView);
+    }
 
     buttons.forEach((button) => {
       const view = "view-" + button.dataset.view;
@@ -110,6 +115,10 @@ document.addEventListener("DOMContentLoaded", () => {
       button.addEventListener("click", () => {
         wrapper.classList.remove("view-grid", "view-list");
         wrapper.classList.add(view);
+        if (progHistorica) {
+          progHistorica.classList.remove("view-grid", "view-list");
+          progHistorica.classList.add(view);
+        }
 
         buttons.forEach((b) => {
           const active = b === button;
@@ -191,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- Imágenes sueltas ---
   const images = document.querySelectorAll(
-    ".wp-block-image img, .entry-content img"
+    ".wp-block-image img, .entry-content img, .tribe-events-single-event-description img"
   );
   if (images.length > 0) {
     images.forEach((img) => {
@@ -251,4 +260,34 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  const path = window.location.pathname;
+  // PRODUCCIONES (página + singles)
+  if (path.includes("/producciones") || path.includes("/produccion/")) {
+    // Página Producciones
+    const pageRoot = document.querySelector(
+      '.breadcrumbs span.post-page.current-item[property="name"]'
+    );
+    if (pageRoot) {
+      pageRoot.textContent = "Producciones";
+    }
+
+    // Single Producciones
+    const singleRoot = document.querySelector(
+      '.breadcrumbs .produccion-root span[property="name"]'
+    );
+    if (singleRoot) {
+      singleRoot.textContent = "Producciones";
+    }
+  }
+
+  const intervaloResize = setInterval(function () {
+    if (window.tribe && window.tribe.events && window.tribe.events.views) {
+      window.dispatchEvent(new Event("resize"));
+    }
+  }, 50);
+
+  setTimeout(() => {
+    clearInterval(intervaloResize);
+  }, 1000);
 });

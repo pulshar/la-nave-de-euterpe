@@ -9,17 +9,17 @@
 <div class="swiper hero-swiper">
               <div class="swiper-wrapper">
                 <div class="swiper-slide"><img src="/wp-content/themes/la-nave-de-euterpe/assets/images/slider-1.jpg"
-                    alt="Imagen 1"></div>
+                    alt="Imagen 1" loading="lazy"><div class="swiper-lazy-preloader"></div></div>
                 <div class="swiper-slide"><img src="/wp-content/themes/la-nave-de-euterpe/assets/images/slider-2.jpg"
-                    alt="Imagen 2"></div>
+                    alt="Imagen 2" loading="lazy"><div class="swiper-lazy-preloader"></div></div>
                 <div class="swiper-slide"><img src="/wp-content/themes/la-nave-de-euterpe/assets/images/slider-3.jpg"
-                    alt="Imagen 3"></div>
+                    alt="Imagen 3" loading="lazy"><div class="swiper-lazy-preloader"></div></div>
                 <div class="swiper-slide"><img src="/wp-content/themes/la-nave-de-euterpe/assets/images/slider-4.jpg"
-                    alt="Imagen 4"></div>
+                    alt="Imagen 4" loading="lazy"><div class="swiper-lazy-preloader"></div></div>
                 <div class="swiper-slide"><img src="/wp-content/themes/la-nave-de-euterpe/assets/images/slider-5.jpg"
-                    alt="Imagen 5"></div>
+                    alt="Imagen 5" loading="lazy"><div class="swiper-lazy-preloader"></div></div>
                 <div class="swiper-slide"><img src="/wp-content/themes/la-nave-de-euterpe/assets/images/slider-6.jpg"
-                    alt="Imagen 6"></div>
+                    alt="Imagen 6" loading="lazy"><div class="swiper-lazy-preloader"></div></div>
               </div>
               <div class="swiper-pagination"></div>
                <div class="swiper-button-prev"></div>
@@ -72,15 +72,15 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:columns {"verticalAlignment":"bottom"} -->
-<div class="wp-block-columns are-vertically-aligned-bottom"><!-- wp:column {"verticalAlignment":"bottom","width":"75%"} -->
-<div class="wp-block-column is-vertically-aligned-bottom" style="flex-basis:75%"><!-- wp:heading {"style":{"elements":{"link":{"color":{"text":"var:preset|color|lilly-white"}}},"typography":{"textTransform":"uppercase","lineHeight":"0.75"},"layout":{"selfStretch":"fit","flexSize":null}},"textColor":"lilly-white","fontSize":"section-title","fontFamily":"cormorant"} -->
+<div class="wp-block-columns are-vertically-aligned-bottom"><!-- wp:column {"verticalAlignment":"bottom","width":"68%"} -->
+<div class="wp-block-column is-vertically-aligned-bottom" style="flex-basis:68%"><!-- wp:heading {"style":{"elements":{"link":{"color":{"text":"var:preset|color|lilly-white"}}},"typography":{"textTransform":"uppercase","lineHeight":"0.75"},"layout":{"selfStretch":"fit","flexSize":null}},"textColor":"lilly-white","fontSize":"section-title","fontFamily":"cormorant"} -->
 <h2 class="wp-block-heading has-lilly-white-color has-text-color has-link-color has-cormorant-font-family has-section-title-font-size" style="line-height:0.75;text-transform:uppercase">PROGRAMACIÓN</h2>
 <!-- /wp:heading --></div>
 <!-- /wp:column -->
 
-<!-- wp:column {"verticalAlignment":"bottom","width":"25%","className":"hide-mobile"} -->
-<div class="wp-block-column is-vertically-aligned-bottom hide-mobile" style="flex-basis:25%"><!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|text-muted-lilly-white"}}},"typography":{"lineHeight":"1.4"}},"textColor":"text-muted-lilly-white","fontSize":"tiny"} -->
-<p class="has-text-muted-lilly-white-color has-text-color has-link-color has-tiny-font-size" style="line-height:1.4">La Nave de Euterpe se convierte en escenario de propuestas tan diversas como
+<!-- wp:column {"verticalAlignment":"bottom","width":"32%","className":"hide-mobile"} -->
+<div class="wp-block-column is-vertically-aligned-bottom hide-mobile" style="flex-basis:32%"><!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|text-muted-lilly-white"}}},"typography":{"lineHeight":"1.4"}},"textColor":"text-muted-lilly-white","fontSize":"small"} -->
+<p class="has-text-muted-lilly-white-color has-text-color has-link-color has-small-font-size" style="line-height:1.4">La Nave de Euterpe se convierte en escenario de propuestas tan diversas como
           inspiradoras.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column --></div>
@@ -131,19 +131,25 @@
               colectivamente.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
-<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:buttons {"className":"hide-mobile-1024","style":{"spacing":{"margin":{"top":"var:preset|spacing|large"}}},"layout":{"type":"flex","justifyContent":"left"}} -->
+<div class="wp-block-buttons hide-mobile-1024" style="margin-top:var(--wp--preset--spacing--large)"><!-- wp:button {"className":"is-style-secondary-outline"} -->
+<div class="wp-block-button is-style-secondary-outline"><a class="wp-block-button__link wp-element-button" href="http://la-nave-de-euterpe.local/eventos/">Programa completo</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
 <!-- /wp:column -->
 
 <!-- wp:column {"width":"66%"} -->
 <div class="wp-block-column" style="flex-basis:66%"><!-- wp:shortcode -->
-[programacion_completa limite="2" modo="futuro" paginacion="false"]
+[proximos_eventos]
 <!-- /wp:shortcode --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns -->
 
-<!-- wp:buttons {"className":"btn-w-100","style":{"spacing":{"margin":{"top":"var:preset|spacing|x-large"}}},"layout":{"type":"flex","justifyContent":"left"}} -->
-<div class="wp-block-buttons btn-w-100" style="margin-top:var(--wp--preset--spacing--x-large)"><!-- wp:button {"className":"is-style-secondary-outline"} -->
-<div class="wp-block-button is-style-secondary-outline"><a class="wp-block-button__link wp-element-button" href="http://la-nave-de-euterpe.local/programacion/">Programa Completo</a></div>
+<!-- wp:buttons {"className":"btn-w-100 hide-desktop-1024","style":{"spacing":{"margin":{"top":"var:preset|spacing|large"}}},"layout":{"type":"flex","justifyContent":"left"}} -->
+<div class="wp-block-buttons btn-w-100 hide-desktop-1024" style="margin-top:var(--wp--preset--spacing--large)"><!-- wp:button {"className":"is-style-secondary-outline"} -->
+<div class="wp-block-button is-style-secondary-outline"><a class="wp-block-button__link wp-element-button" href="http://la-nave-de-euterpe.local/programacion/">Programa completo</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:group --></div>
@@ -158,20 +164,59 @@
 <!-- wp:group {"style":{"spacing":{"margin":{"top":"0"},"padding":{"right":"var:preset|spacing|medium","left":"var:preset|spacing|medium","top":"var:preset|spacing|xxx-large","bottom":"var:preset|spacing|xxx-large"}},"dimensions":{"minHeight":""}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group" style="margin-top:0;padding-top:var(--wp--preset--spacing--xxx-large);padding-right:var(--wp--preset--spacing--medium);padding-bottom:var(--wp--preset--spacing--xxx-large);padding-left:var(--wp--preset--spacing--medium)"><!-- wp:group {"metadata":{"name":"Section Title Block"},"className":"anim","style":{"spacing":{"blockGap":"var:preset|spacing|medium"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group anim"><!-- wp:paragraph {"className":"headings-subtitle","style":{"elements":{"link":{"color":{"text":"var:preset|color|text-muted-lilly-white"}}}},"textColor":"text-muted-lilly-white","fontSize":"medium"} -->
-<p class="headings-subtitle has-text-muted-lilly-white-color has-text-color has-link-color has-medium-font-size">
-      ARTÍCULOS Y REFLEXIONES</p>
+<p class="headings-subtitle has-text-muted-lilly-white-color has-text-color has-link-color has-medium-font-size">CREACIÓN PROPIA</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:columns {"verticalAlignment":"bottom"} -->
-<div class="wp-block-columns are-vertically-aligned-bottom"><!-- wp:column {"verticalAlignment":"bottom","width":"75%"} -->
-<div class="wp-block-column is-vertically-aligned-bottom" style="flex-basis:75%"><!-- wp:heading {"style":{"elements":{"link":{"color":{"text":"var:preset|color|lilly-white"}}},"typography":{"textTransform":"uppercase","lineHeight":"0.75"},"layout":{"selfStretch":"fit","flexSize":null}},"textColor":"lilly-white","fontSize":"section-title","fontFamily":"cormorant"} -->
+<div class="wp-block-columns are-vertically-aligned-bottom"><!-- wp:column {"verticalAlignment":"bottom","width":"68%"} -->
+<div class="wp-block-column is-vertically-aligned-bottom" style="flex-basis:68%"><!-- wp:heading {"style":{"elements":{"link":{"color":{"text":"var:preset|color|lilly-white"}}},"typography":{"lineHeight":"0.75","textTransform":"uppercase"},"layout":{"selfStretch":"fit","flexSize":null}},"textColor":"lilly-white","fontSize":"section-title","fontFamily":"cormorant"} -->
+<h2 class="wp-block-heading has-lilly-white-color has-text-color has-link-color has-cormorant-font-family has-section-title-font-size" style="line-height:0.75;text-transform:uppercase">PRODUCCIONES</h2>
+<!-- /wp:heading --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"verticalAlignment":"bottom","width":"32%","className":"hide-mobile"} -->
+<div class="wp-block-column is-vertically-aligned-bottom hide-mobile" style="flex-basis:32%"><!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|text-muted-lilly-white"}}},"typography":{"lineHeight":"1.4"}},"textColor":"text-muted-lilly-white","fontSize":"small"} -->
+<p class="has-text-muted-lilly-white-color has-text-color has-link-color has-small-font-size" style="line-height:1.4">Cada producción propia es fruto de un trabajo riguroso y cuidado que cobra vida en nuestros escenarios.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"is-style-blank-group","style":{"spacing":{"padding":{"top":"var:preset|spacing|x-large"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group is-style-blank-group" style="padding-top:var(--wp--preset--spacing--x-large)"><!-- wp:shortcode -->
+[producciones limite="3" paginacion="false"]
+<!-- /wp:shortcode -->
+
+<!-- wp:buttons {"className":"btn-w-100","style":{"spacing":{"margin":{"top":"var:preset|spacing|large"}}},"layout":{"type":"flex","justifyContent":"left"}} -->
+<div class="wp-block-buttons btn-w-100" style="margin-top:var(--wp--preset--spacing--large)"><!-- wp:button {"className":"is-style-secondary-outline"} -->
+<div class="wp-block-button is-style-secondary-outline"><a class="wp-block-button__link wp-element-button" href="http://la-nave-de-euterpe.local/producciones/">Ver nuestras producciones</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"is-style-blank-group","layout":{"type":"default"}} -->
+<div class="wp-block-group is-style-blank-group"><!-- wp:separator {"className":"is-style-default","style":{"spacing":{"margin":{"top":"0","bottom":"0"}}},"backgroundColor":"text-muted-lilly-white"} -->
+<hr class="wp-block-separator has-text-color has-text-muted-lilly-white-color has-alpha-channel-opacity has-text-muted-lilly-white-background-color has-background is-style-default" style="margin-top:0;margin-bottom:0"/>
+<!-- /wp:separator --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"style":{"spacing":{"margin":{"top":"0"},"padding":{"right":"var:preset|spacing|medium","left":"var:preset|spacing|medium","top":"var:preset|spacing|xxx-large","bottom":"var:preset|spacing|xxx-large"}},"dimensions":{"minHeight":""}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group" style="margin-top:0;padding-top:var(--wp--preset--spacing--xxx-large);padding-right:var(--wp--preset--spacing--medium);padding-bottom:var(--wp--preset--spacing--xxx-large);padding-left:var(--wp--preset--spacing--medium)"><!-- wp:group {"metadata":{"name":"Section Title Block"},"className":"anim","style":{"spacing":{"blockGap":"var:preset|spacing|medium"}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group anim"><!-- wp:paragraph {"className":"headings-subtitle","style":{"elements":{"link":{"color":{"text":"var:preset|color|text-muted-lilly-white"}}}},"textColor":"text-muted-lilly-white","fontSize":"medium"} -->
+<p class="headings-subtitle has-text-muted-lilly-white-color has-text-color has-link-color has-medium-font-size">NOTICIAS DE LA NAVE</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:columns {"verticalAlignment":"bottom"} -->
+<div class="wp-block-columns are-vertically-aligned-bottom"><!-- wp:column {"verticalAlignment":"bottom","width":"68%"} -->
+<div class="wp-block-column is-vertically-aligned-bottom" style="flex-basis:68%"><!-- wp:heading {"style":{"elements":{"link":{"color":{"text":"var:preset|color|lilly-white"}}},"typography":{"textTransform":"uppercase","lineHeight":"0.75"},"layout":{"selfStretch":"fit","flexSize":null}},"textColor":"lilly-white","fontSize":"section-title","fontFamily":"cormorant"} -->
 <h2 class="wp-block-heading has-lilly-white-color has-text-color has-link-color has-cormorant-font-family has-section-title-font-size" style="line-height:0.75;text-transform:uppercase">Actualidad</h2>
 <!-- /wp:heading --></div>
 <!-- /wp:column -->
 
-<!-- wp:column {"verticalAlignment":"bottom","width":"25%","className":"hide-mobile"} -->
-<div class="wp-block-column is-vertically-aligned-bottom hide-mobile" style="flex-basis:25%"><!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|text-muted-lilly-white"}}},"typography":{"lineHeight":"1.4"}},"textColor":"text-muted-lilly-white","fontSize":"tiny"} -->
-<p class="has-text-muted-lilly-white-color has-text-color has-link-color has-tiny-font-size" style="line-height:1.4">La creación no se limita al escenario. También queremos dejar huella en palabras e
+<!-- wp:column {"verticalAlignment":"bottom","width":"32%","className":"hide-mobile"} -->
+<div class="wp-block-column is-vertically-aligned-bottom hide-mobile" style="flex-basis:32%"><!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|text-muted-lilly-white"}}},"typography":{"lineHeight":"1.4"}},"textColor":"text-muted-lilly-white","fontSize":"small"} -->
+<p class="has-text-muted-lilly-white-color has-text-color has-link-color has-small-font-size" style="line-height:1.4">La creación no se limita al escenario. También queremos dejar huella en palabras e
           imágenes.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column --></div>
@@ -183,23 +228,35 @@
 <div class="wp-block-columns are-vertically-aligned-bottom"><!-- wp:column {"width":"100%"} -->
 <div class="wp-block-column" style="flex-basis:100%"><!-- wp:query {"queryId":12,"query":{"perPage":2,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false,"taxQuery":null,"parents":[],"format":[]}} -->
 <div class="wp-block-query"><!-- wp:post-template {"className":"post-noticias","style":{"spacing":{"blockGap":"0"}}} -->
-<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|x-small-8","padding":{"top":"var:preset|spacing|large","bottom":"var:preset|spacing|large","left":"var:preset|spacing|small","right":"var:preset|spacing|small"}}},"layout":{"type":"constrained","justifyContent":"left"}} -->
-<div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--large);padding-right:var(--wp--preset--spacing--small);padding-bottom:var(--wp--preset--spacing--large);padding-left:var(--wp--preset--spacing--small)"><!-- wp:post-date {"format":"d M Y","style":{"elements":{"link":{"color":{"text":"var:preset|color|accent-2"}}},"typography":{"textTransform":"uppercase"}},"textColor":"accent-2"} /-->
+<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|large","bottom":"var:preset|spacing|large"},"blockGap":"var:preset|spacing|large"}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"}} -->
+<div class="wp-block-group" style="padding-top:var(--wp--preset--spacing--large);padding-bottom:var(--wp--preset--spacing--large)"><!-- wp:post-featured-image {"isLink":true,"aspectRatio":"1","width":"200px","height":"200px","sizeSlug":"thumbnail","style":{"layout":{"selfStretch":"fit","flexSize":null}}} /-->
 
-<!-- wp:post-title {"isLink":true,"style":{"elements":{"link":{"color":{"text":"var:preset|color|lilly-white"}}},"typography":{"fontStyle":"normal","fontWeight":"400"}},"textColor":"lilly-white","fontSize":"x-large"} /-->
+<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|x-small-8"}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group"><!-- wp:post-date {"format":"d M Y","metadata":{"bindings":{"datetime":{"source":"core/post-data","args":{"field":"date"}}}},"style":{"elements":{"link":{"color":{"text":"var:preset|color|accent-2"}}},"typography":{"textTransform":"uppercase"}},"textColor":"accent-2"} /-->
 
-<!-- wp:group {"className":"read-more-btn","style":{"spacing":{"margin":{"top":"var:preset|spacing|large"},"blockGap":"var:preset|spacing|small"}},"layout":{"type":"flex","flexWrap":"nowrap"}} -->
-<div class="wp-block-group read-more-btn" style="margin-top:var(--wp--preset--spacing--large)"><!-- wp:read-more {"style":{"typography":{"textTransform":"uppercase"},"elements":{"link":{"color":{"text":"var:preset|color|lilly-white"}}},"spacing":{"margin":{"top":"1px"}}},"textColor":"lilly-white","fontSize":"default"} /-->
+<!-- wp:post-title {"isLink":true,"style":{"elements":{"link":{"color":{"text":"var:preset|color|lilly-white"}}},"typography":{"fontStyle":"normal","fontWeight":"400"}},"textColor":"lilly-white","fontSize":"large"} /-->
+
+<!-- wp:post-excerpt {"excerptLength":24} /-->
+
+<!-- wp:group {"className":"read-more-btn","style":{"spacing":{"margin":{"top":"var:preset|spacing|medium"},"blockGap":"var:preset|spacing|small"}},"layout":{"type":"flex","flexWrap":"nowrap"}} -->
+<div class="wp-block-group read-more-btn" style="margin-top:var(--wp--preset--spacing--medium)"><!-- wp:read-more {"style":{"typography":{"textTransform":"uppercase"},"elements":{"link":{"color":{"text":"var:preset|color|lilly-white"}}},"spacing":{"margin":{"top":"1px"}}},"textColor":"lilly-white","fontSize":"default"} /-->
 
 <!-- wp:outermost/icon-block {"iconName":"","iconColor":"accent-2","iconColorValue":"#D69C56","width":"170px"} -->
 <div class="wp-block-outermost-icon-block"><div class="icon-container has-icon-color has-accent-2-color" style="color:#D69C56;width:170px;transform:rotate(0deg) scaleX(1) scaleY(1)"><svg width="175" height="16" viewBox="0 0 175 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7C0.447715 7 4.82823e-08 7.44772 0 8C-4.82823e-08 8.55228 0.447715 9 1 9L1 8L1 7ZM174.707 8.70712C175.098 8.3166 175.098 7.68343 174.707 7.29291L168.343 0.928947C167.953 0.538422 167.319 0.538422 166.929 0.928947C166.538 1.31947 166.538 1.95264 166.929 2.34316L172.586 8.00002L166.929 13.6569C166.538 14.0474 166.538 14.6806 166.929 15.0711C167.319 15.4616 167.953 15.4616 168.343 15.0711L174.707 8.70712ZM1 8L1 9L174 9.00002L174 8.00002L174 7.00002L1 7L1 8Z" fill="currentColor"></path></svg></div></div>
 <!-- /wp:outermost/icon-block --></div>
 <!-- /wp:group --></div>
+<!-- /wp:group --></div>
 <!-- /wp:group -->
 <!-- /wp:post-template --></div>
 <!-- /wp:query --></div>
 <!-- /wp:column --></div>
-<!-- /wp:columns --></div>
+<!-- /wp:columns -->
+
+<!-- wp:buttons {"className":"btn-w-100 btn-ver-mas","layout":{"type":"flex","justifyContent":"left"}} -->
+<div class="wp-block-buttons btn-w-100 btn-ver-mas"><!-- wp:button {"className":"is-style-secondary-outline"} -->
+<div class="wp-block-button is-style-secondary-outline"><a class="wp-block-button__link wp-element-button" href="http://la-nave-de-euterpe.local/actualidad/">Ver más noticias</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
@@ -217,15 +274,15 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:columns {"verticalAlignment":"bottom"} -->
-<div class="wp-block-columns are-vertically-aligned-bottom"><!-- wp:column {"verticalAlignment":"bottom","width":"75%"} -->
-<div class="wp-block-column is-vertically-aligned-bottom" style="flex-basis:75%"><!-- wp:heading {"style":{"elements":{"link":{"color":{"text":"var:preset|color|lilly-white"}}},"typography":{"textTransform":"uppercase","lineHeight":"0.75"},"layout":{"selfStretch":"fit","flexSize":null}},"textColor":"lilly-white","fontSize":"section-title","fontFamily":"cormorant"} -->
+<div class="wp-block-columns are-vertically-aligned-bottom"><!-- wp:column {"verticalAlignment":"bottom","width":"68%"} -->
+<div class="wp-block-column is-vertically-aligned-bottom" style="flex-basis:68%"><!-- wp:heading {"style":{"elements":{"link":{"color":{"text":"var:preset|color|lilly-white"}}},"typography":{"textTransform":"uppercase","lineHeight":"0.75"},"layout":{"selfStretch":"fit","flexSize":null}},"textColor":"lilly-white","fontSize":"section-title","fontFamily":"cormorant"} -->
 <h2 class="wp-block-heading has-lilly-white-color has-text-color has-link-color has-cormorant-font-family has-section-title-font-size" style="line-height:0.75;text-transform:uppercase">COLABORADORES</h2>
 <!-- /wp:heading --></div>
 <!-- /wp:column -->
 
-<!-- wp:column {"verticalAlignment":"bottom","width":"25%","className":"hide-mobile"} -->
-<div class="wp-block-column is-vertically-aligned-bottom hide-mobile" style="flex-basis:25%"><!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|text-muted-lilly-white"}}},"typography":{"lineHeight":"1.4"}},"textColor":"text-muted-lilly-white","fontSize":"tiny"} -->
-<p class="has-text-muted-lilly-white-color has-text-color has-link-color has-tiny-font-size" style="line-height:1.4">Nada de esto sería posible sin quienes suman su energía a bordo de esta nave.</p>
+<!-- wp:column {"verticalAlignment":"bottom","width":"32%","className":"hide-mobile"} -->
+<div class="wp-block-column is-vertically-aligned-bottom hide-mobile" style="flex-basis:32%"><!-- wp:paragraph {"style":{"elements":{"link":{"color":{"text":"var:preset|color|text-muted-lilly-white"}}},"typography":{"lineHeight":"1.4"}},"textColor":"text-muted-lilly-white","fontSize":"small"} -->
+<p class="has-text-muted-lilly-white-color has-text-color has-link-color has-small-font-size" style="line-height:1.4">Nada de esto sería posible sin quienes suman su energía a bordo de esta nave.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>

@@ -122,8 +122,8 @@ body .menu-principal {
     width: 100px !important;
   }
 }
-/* Cambio de comportamiento en pantallas >= 880px */
-@media (min-width: 880px) {
+/* Cambio de comportamiento en pantallas >= 1024px */
+@media (min-width: 1024px) {
   /* En escritorio no mostramos el menú "open" */
   body .wp-block-navigation__responsive-container-open:not(.always-shown) {
     display: none !important;
@@ -141,7 +141,7 @@ body .menu-principal {
     flex-direction: row;
   }
   .wp-block-navigation__responsive-dialog li {
-    font-size: initial !important;
+    font-size: var(--wp--preset--font-size--small) !important;
   }
 }
 
@@ -197,12 +197,16 @@ a:where(:not(.wp-element-button):not(.post-noticias a)) {
 .width-65 {
   width: 100%;
   max-width: 100%;
-  @media (min-width: 782px) {
-    width: 960px;
-    max-width: 960px;
+  @media (min-width: 1120px) {
+    width: 1048px;
+    max-width: 1048px;
   }
 }
-
+.wp-block-list {
+  color: var(--wp--preset--color--text-muted-lilly-white);
+  line-height: 1.6;
+  padding: 0 0 0 40px !important;
+}
 /* Aplica solo en el frontend, no en el editor */
 .is-frontend .anim > * {
   opacity: 0;
@@ -420,11 +424,10 @@ blockquote cite {
   }
   input {
     width: 100%;
-    padding: 0.6rem 0.75rem;
+    padding: 0.75rem 3rem 0.75rem 0.75rem;
     @media (min-width: 600px) {
-      padding: 0.85rem;
+      padding: 1.25rem 3rem 1.25rem 1rem;
     }
-    padding-right: 3rem;
     border-radius: 3px;
     border: 1px solid
       color-mix(
@@ -536,7 +539,7 @@ blockquote cite {
       color: var(--wp--preset--color--accent-2);
     }
   }
-  .post-post.current-item {
+  .post.current-item {
     display: inline-block;
     max-width: 24ch;
     @media (max-width: 480px) {
@@ -825,7 +828,13 @@ h4 {
   }
   gap: var(--wp--preset--spacing--medium);
 }
-
+.grid-container.producciones {
+  grid-template-columns: repeat(auto-fill, minmax(min(18rem, 100%), 1fr));
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(auto-fill, minmax(min(22rem, 100%), 1fr));
+  }
+  gap: var(--wp--preset--spacing--medium);
+}
 /* ===========================================================
    LISTADOS: Noticias / Posts / Overlays
    =========================================================== */
@@ -836,6 +845,10 @@ h4 {
       var(--wp--preset--color--text-muted-lilly-white) 40%,
       transparent
     );
+  padding-inline: var(--wp--preset--spacing--x-small-8);
+  @media (min-width: 880px) {
+    //padding-inline: var(--wp--preset--spacing--small) ;
+  }
   .has-x-large-font-size {
     @media (max-width: 599px) {
       font-size: var(--wp--preset--font-size--large) !important;
@@ -847,6 +860,22 @@ h4 {
   .read-more-btn {
     svg {
       transition: transform 0.25s var(--ease-out-back);
+    }
+  }
+  figure {
+    display: none;
+    @media (min-width: 880px) {
+      display: block;
+    }
+    img {
+      border: 1px solid
+        color-mix(
+          in srgb,
+          var(--wp--preset--color--text-muted-lilly-white) 40%,
+          transparent
+        );
+      opacity: 0.75;
+      transition: opacity 0.3s ease;
     }
   }
 
@@ -865,6 +894,9 @@ h4 {
       svg {
         transform: translateX(15px);
       }
+    }
+    img {
+      opacity: 1;
     }
   }
 }
@@ -895,6 +927,12 @@ ul.post-overlay {
 .post-overlay > li {
   position: relative;
   list-style: none;
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--wp--preset--color--text-muted-lilly-white) 20%,
+      transparent
+    );
 
   figure {
     margin: 0;
@@ -1028,12 +1066,14 @@ ul.post-overlay {
       position: relative;
       cursor: pointer;
       padding-top: var(--space-small-half);
+      border: 0;
       border-top: var(--border-muted);
 
       &:last-child {
         padding-bottom: var(--space-small-half);
         border-bottom: var(--border-muted);
         .info {
+          padding-bottom: var(--space-small-half);
           @media (min-width: 600px) {
             padding-bottom: 24px;
           }
@@ -1044,6 +1084,12 @@ ul.post-overlay {
         flex-shrink: 0;
         width: 120px;
         margin-left: var(--wp--preset--spacing--x-small-8);
+        border: 1px solid
+          color-mix(
+            in srgb,
+            var(--wp--preset--color--text-muted-lilly-white) 20%,
+            transparent
+          );
       }
 
       .info {
@@ -1054,7 +1100,6 @@ ul.post-overlay {
         h2 {
           max-width: 80%;
         }
-
         @media (max-width: 599px) {
           padding: var(--space-small-half) 0;
           position: unset;
@@ -1074,7 +1119,41 @@ ul.post-overlay {
         }
       }
     }
-
+    .producciones li {
+      h2 {
+        max-width: 100%;
+      }
+      &:last-child {
+        .info {
+          padding-bottom: 16px;
+        }
+      }
+      .info {
+        padding: 0 var(--wp--preset--spacing--x-small-8) 0 148px;
+      }
+      @media (max-width: 599px) {
+        .info {
+          position: absolute;
+          padding: 0 var(--wp--preset--spacing--x-small-8) 0 105px;
+        }
+        &:last-child {
+          .info {
+            padding-bottom: var(--space-small-half);
+          }
+        }
+        h2 {
+          font-size: clamp(
+            1.119rem,
+            1.119rem + ((1vw - 0.2rem) * 1.147),
+            1.75rem
+          );
+        }
+        figure {
+          display: block;
+          width: 80px;
+        }
+      }
+    }
     .pagination {
       border-top: 0;
       padding-top: 0;
@@ -1167,7 +1246,23 @@ ul.post-overlay {
     }
   }
 }
-
+.menu-mes-programacion {
+  margin-block-start: var(--wp--preset--spacing--medium) !important;
+  display: flex;
+  justify-content: space-between;
+  @media (min-width: 560px) {
+    background-color: color-mix(
+      in srgb,
+      var(--wp--preset--color--lilly-white) 6%,
+      transparent
+    );
+    padding: 1rem;
+    border-radius: 3px;
+  }
+  .view-controls {
+    justify-content: flex-start;
+  }
+}
 .ultimas-noticias {
   display: grid;
   gap: var(--wp--preset--spacing--x-small-8);
@@ -1254,13 +1349,14 @@ ul.post-overlay {
   }
 
   .wp-block-post-title a {
-    font-family: var(--wp--preset--font-family--body);
-    display: inline-block;
+    font-family: var(--wp--preset--font-family--headings);
+	display: inline-block;
     max-width: 90%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
 }
 .colaborador-img {
@@ -1302,13 +1398,14 @@ ul.post-overlay {
     display: flex;
     justify-content: center;
     h3 {
-      font-family: var(--wp--preset--font-family--body);
+      /* font-family: var(--wp--preset--font-family--body); */
       color: var(--wp--preset--color--accent-2);
       max-width: 90%;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
   }
 }
@@ -1346,26 +1443,6 @@ ul.post-overlay {
         transform: scale(0.65);
       }
     }
-  }
-  .swiper-lazy-preloader {
-    width: 36px;
-    height: 36px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-left: -18px;
-    margin-top: -18px;
-    z-index: 10;
-    transform-origin: 50%;
-    box-sizing: border-box;
-    border: 4px solid
-      color-mix(
-        in srgb,
-        var(--wp--preset--color--text-muted-lilly-white) 40%,
-        transparent
-      );
-    border-radius: 50%;
-    border-top-color: transparent;
   }
 }
 .hero-swiper {
@@ -1437,6 +1514,26 @@ ul.post-overlay {
     left: auto;
     right: 4rem;
   }
+}
+.swiper-lazy-preloader {
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -18px;
+  margin-top: -18px;
+  z-index: 10;
+  transform-origin: 50%;
+  box-sizing: border-box;
+  border: 4px solid
+    color-mix(
+      in srgb,
+      var(--wp--preset--color--text-muted-lilly-white) 40%,
+      transparent
+    );
+  border-radius: 50%;
+  border-top-color: transparent;
 }
 /* ===========================================================
    FANCY 
@@ -1536,9 +1633,79 @@ ul.post-overlay {
 }
 
 /* ===========================================================
+   ENLACE INFORMATIVO (botón con flecha)
+   =========================================================== */
+.info-link {
+  position: relative;
+  margin-top: var(--wp--preset--spacing--small) !important;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--wp--preset--color--lilly-white);
+  font-weight: 500;
+  text-decoration: none;
+  overflow: visible;
+  transition: color 0.2s ease !important;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60%;
+    padding: 1.5rem 1.5rem;
+    box-sizing: border-box;
+    border: 2px solid var(--wp--preset--color--accent-2);
+    border-right-width: 2px;
+    border-right-style: solid;
+    transition: all 0.35s var(--ease-out-back);
+  }
+
+  .label {
+    position: relative;
+    z-index: 1;
+    font-size: 16px;
+    line-height: 1;
+    background: var(--wp--preset--color--accent-1);
+    margin-left: 20px;
+    padding-block: 6px;
+  }
+
+  .arrow {
+    content: "";
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='m14.5 6.5-1 1 3.7 3.7H4v1.6h13.2l-3.7 3.7 1 1 5.6-5.5z'/></svg>")
+      no-repeat center;
+    mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='m14.5 6.5-1 1 3.7 3.7H4v1.6h13.2l-3.7 3.7 1 1 5.6-5.5z'/></svg>")
+      no-repeat center;
+    background-size: contain;
+    transition: transform 0.35s var(--ease-out-back);
+  }
+  &:hover {
+    color: var(--wp--preset--color--accent-2);
+    &::before {
+      width: 70%;
+    }
+    .arrow {
+      transform: translateX(8px);
+    }
+  }
+}
+/*
+<a href="#" class="info-link">
+    <span class="label">Más información</span>
+    <span class="arrow">→</span>
+  </a>
+*/
+
+/* ===========================================================
    PROGRAMACIÓN MENSUAL (lista de actividades)
    =========================================================== */
 .programacion-mensual {
+  margin-block-start: var(--wp--preset--spacing--large);
   .mes-programacion {
     font-family: var(--wp--preset--font-family--body);
     text-transform: uppercase;
@@ -1549,16 +1716,27 @@ ul.post-overlay {
   }
   &.completa {
     .mes-programacion {
-    font-size: 1.5rem;
-  }
-    .mes-wrapper {
-      padding-block: var(--wp--preset--spacing--large);
-      border-top: 1px solid
-        color-mix(
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      &::after {
+        background-color: color-mix(
           in srgb,
           var(--wp--preset--color--text-muted-lilly-white) 40%,
           transparent
         );
+        content: "";
+        display: block;
+        flex: auto;
+        height: 1px;
+        margin-left: 20px;
+      }
+    }
+    .mes-wrapper {
+      padding-block: var(--wp--preset--spacing--medium);
+      &:first-child {
+        padding-block-start: 0;
+      }
       &:last-child {
         padding-block-end: 0;
       }
@@ -1566,6 +1744,7 @@ ul.post-overlay {
   }
 
   &.simple {
+    margin-block-start: 0;
     .mes-wrapper {
       padding-block: var(--wp--preset--spacing--medium);
       &:first-child {
@@ -1624,6 +1803,11 @@ ul.post-overlay {
 .view-list {
   .programacion-mensual {
     &.completa {
+      .mes-programacion {
+        &::after {
+          content: none;
+        }
+      }
       .mes-wrapper {
         padding-block: var(--wp--preset--spacing--medium);
         border-top: 0;
@@ -1653,18 +1837,82 @@ ul.post-overlay {
     }
   }
 }
-
+.ultimos-eventos {
+  margin-block-start: var(--wp--preset--spacing--large) !important;
+  .title {
+    font-family: var(--wp--preset--font-family--body);
+    text-transform: uppercase;
+    font-size: var(--wp--preset--font-size--medium);
+    margin-block-start: 0;
+    color: var(--wp--preset--color--text-muted-lilly-white);
+    font-weight: 400;
+    font-size: 1.5rem;
+  }
+}
+.no-actividades {
+  text-align: center;
+  color: var(--wp--preset--color--lilly-white);
+  display: grid;
+  height: 100%;
+  place-content: center;
+  border-radius: 5px;
+  background-color: color-mix(
+    in srgb,
+    var(--wp--preset--color--lilly-white) 6%,
+    transparent
+  );
+  p {
+    svg {
+      width: 48px;
+      height: 48px;
+      color: var(--wp--preset--color--accent-2);
+    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: var(--wp--preset--spacing--small);
+  }
+}
+.box-reservas {
+  margin-top: var(--wp--preset--spacing--large);
+  text-align: center;
+  color: var(--wp--preset--color--lilly-white);
+  display: grid;
+  height: 100%;
+  place-content: center;
+  border-radius: 5px;
+  background-color: color-mix(
+    in srgb,
+    var(--wp--preset--color--lilly-white) 6%,
+    transparent
+  );
+  p {
+    svg {
+      width: 48px;
+      height: 48px;
+      color: var(--wp--preset--color--accent-2);
+    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: var(--wp--preset--spacing--small);
+  }
+}
 /* ===========================================================
    PROGRAMACIÓN HISTÓRICA (accordion)
    =========================================================== */
 .programacion-historica {
-  padding-block-start: var(--wp--preset--spacing--large) !important;
-  border-top: 1px solid
-    color-mix(
-      in srgb,
-      var(--wp--preset--color--text-muted-lilly-white) 40%,
-      transparent
-    );
+  &.view-grid {
+    padding-block-start: var(--wp--preset--spacing--large) !important;
+    border-top: 1px solid
+      color-mix(
+        in srgb,
+        var(--wp--preset--color--text-muted-lilly-white) 40%,
+        transparent
+      );
+  }
   h2 {
     margin-block-end: 0.5em;
     font-family: var(--wp--preset--font-family--body);
@@ -1672,8 +1920,23 @@ ul.post-overlay {
     margin-block-start: 0;
     color: var(--wp--preset--color--lilly-white);
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    &::after {
+      background-color: color-mix(
+        in srgb,
+        var(--wp--preset--color--text-muted-lilly-white) 40%,
+        transparent
+      );
+      content: "";
+      display: block;
+      flex: auto;
+      height: 1px;
+      margin-left: 20px;
+    }
   }
   p {
+    color: var(--wp--preset--color--text-muted-lilly-white);
     margin-block-start: 0;
     margin-block-end: 1.5em;
   }
@@ -1776,6 +2039,9 @@ ul.post-overlay {
   }
   .title {
     color: var(--wp--preset--color--lilly-white);
+  }
+	small {
+    color: var(--wp--preset--color--text-muted-lilly-white);
   }
 }
 
@@ -2045,5 +2311,84 @@ a {
   .has-cormorant-font-family {
     letter-spacing: 0.8px;
     font-weight: 600 !important;
+  }
+}
+/* Standardize form styling
+--------------------------------------------- */
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+input[type="button"],
+input[type="email"],
+input[type="search"],
+input[type="submit"],
+input[type="text"],
+textarea {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.selector-mes-programacion {
+  display: inline-flex;
+  gap: var(--wp--preset--spacing--x-small-8);
+  align-items: center;
+  input:not([type="submit"]),
+  select,
+  textarea,
+  .wp-block-post-comments-form
+    input:not([type="submit"]):not([type="checkbox"]),
+  .wp-block-post-comments-form textarea {
+    color: var(--wp--preset--color--lilly-white);
+    border-radius: 5px;
+    border: 1px solid
+      color-mix(
+        in srgb,
+        var(--wp--preset--color--text-muted-lilly-white) 30%,
+        transparent
+      );
+    box-shadow: none;
+    outline: none;
+    color: var(--wp--preset--color--lilly-white);
+    background-color: color-mix(
+      in srgb,
+      var(--wp--preset--color--accent-1) 80%,
+      transparent
+    );
+    [data-scheme="dark"] & {
+      background-color: color-mix(
+        in srgb,
+        var(--wp--preset--color--accent-1) 80%,
+        transparent
+      );
+    }
+    padding: 0.5em 0.75em;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible {
+    outline-color: var(--wp--preset--color--primary);
+  }
+
+  input[type="checkbox"],
+  input[type="image"],
+  input[type="radio"] {
+    width: auto;
+  }
+  label {
+    display: none;
+    @media (min-width: 560px) {
+      display: block;
+    }
+  }
+
+  ::placeholder {
+    color: var(--wp--preset--color--secondary);
+    font-size: var(--wp--preset--font-size--small);
+    opacity: 0.75;
   }
 }

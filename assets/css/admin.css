@@ -1,0 +1,13 @@
+.wp-admin.post-type-tribe_events {
+  .tec-settings-form,
+  #event_tribe_venue,
+  #event_tribe_organizer,
+  #event_url,
+  #event_cost .eventBritePluginPlug,
+  #postexcerpt,
+  #tagsdiv-post_tag,
+  #tribe_events_catdiv,
+  #pageparentdiv, #A2A_SHARE_SAVE_meta, #tec-events-qr-code {
+    display: none;
+  }
+}

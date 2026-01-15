@@ -20,6 +20,19 @@ function euterpe_login_custom_css() {
 add_action( 'login_enqueue_scripts', 'euterpe_login_custom_css' );
 
 /* --------------------------------------------------------------
+ *  ADMIN PAGE CUSTOMIZATION
+ * -------------------------------------------------------------- */
+function euterpe_admin_custom_css() {
+	wp_enqueue_style(
+		'euterpe-login',
+		get_stylesheet_directory_uri() . '/assets/css/admin.css',
+		array(),
+		filemtime( get_stylesheet_directory() . '/assets/css/admin.css' )
+	);
+}
+add_action( 'admin_enqueue_scripts', 'euterpe_admin_custom_css' );
+
+/* --------------------------------------------------------------
  *  THEME SETUP
  * -------------------------------------------------------------- */
 function euterpe_setup() {
@@ -52,7 +65,7 @@ function euterpe_enqueue_scripts() {
 	wp_enqueue_script( 'swiper-js', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', array(), null, true );
 
 	// Fancybox (solo en páginas que lo requieran)
-  	 if ( is_singular() && ( has_block( 'core/image' ) || has_block( 'core/gallery' ) ) ) {
+  	 if ( is_singular() && ( has_block( 'core/image' ) || has_block( 'core/gallery' ) || is_singular('tribe_events') ) ) {
         wp_enqueue_style('fancybox-css', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css');
         wp_enqueue_script('fancybox-js', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js', array(), null, true);
     }
@@ -65,17 +78,17 @@ function euterpe_enqueue_scripts() {
     // Registrar tu CSS minificado
     wp_enqueue_style(
         'euterpe-style',
-        get_stylesheet_directory_uri() . '/style.min.css', // ruta al minificado
+        get_stylesheet_directory_uri() . '/style.css', // ruta al minificado
         array(), 
-        filemtime(get_stylesheet_directory() . '/style.min.css')
+        filemtime(get_stylesheet_directory() . '/style.css')
     );
 
 	// Script principal dependiente de Swiper y Lenis
 	wp_enqueue_script(
 		'euterpe-main',
-		get_stylesheet_directory_uri() . '/assets/js/main.min.js',
+		get_stylesheet_directory_uri() . '/assets/js/main.js',
 		array( 'swiper-js', 'lenis' ),
-		filemtime( get_stylesheet_directory() . '/assets/js/main.min.js' ),
+		filemtime( get_stylesheet_directory() . '/assets/js/main.js' ),
 		true
 	);
 }
@@ -201,7 +214,7 @@ function euterpe_programacion_completa( $atts ) {
 	// Comparador según modo
 	if ( $atts['modo'] === 'pasado' ) {
 		$compare = '<=';
-		$order   = 'DESC';
+		$order   = 'ASC';
 	} else {
 		$compare = '>=';
 		$order   = 'ASC';
@@ -236,8 +249,8 @@ function euterpe_programacion_completa( $atts ) {
 	if ( ! $query->have_posts() ) {
 		$mensaje = ( $atts['modo'] === 'pasado' )
 			? __( 'No hay actividades pasadas registradas.', 'euterpe' )
-			: __( 'No hay actividades programadas próximamente.', 'euterpe' );
-		return '<p>' . $mensaje . '</p>';
+			: __( '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-frown-icon lucide-frown"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>No hay actividades programadas próximamente.', 'euterpe' );
+		return '<div class="no-actividades"><p>' . $mensaje . '</p></div>';
 	}
 
 	ob_start(); ?>
@@ -259,7 +272,7 @@ function euterpe_programacion_completa( $atts ) {
 				<li class="wp-block-post item-programacion">
 					<figure class="wp-block-post-featured-image">
 						<a href="<?php the_permalink(); ?>">
-							<?php the_post_thumbnail( 'medium' ); ?>
+							<?php the_post_thumbnail( 'medium_large' ); ?>
 						</a>
 					</figure>
 
@@ -328,6 +341,45 @@ function euterpe_programacion_completa( $atts ) {
 }
 add_shortcode( 'programacion_completa', 'euterpe_programacion_completa' );
 
+// Forzar siempre que los eventos sean "featured"
+add_action( 'save_post', function( $post_id, $post, $update ) {
+
+    // Sólo para eventos
+    if ( ! isset( $post->post_type ) || 'tribe_events' !== $post->post_type ) {
+        return;
+    }
+
+    // Evitar autosaves o revisiones
+    if ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) ) {
+        return;
+    }
+
+    // Evitar bucles infinitos: si ya está marcado, no hacer nada pesado
+    $already = get_post_meta( $post_id, '_tribe_featured', true );
+    if ( empty( $already ) ) {
+        update_post_meta( $post_id, '_tribe_featured', 1 );
+    } else {
+        // Aun así forzamos la otra key por si acaso
+        update_post_meta( $post_id, '_tribe_featured', 1 );
+    }
+
+    // También escribir la key que usa la clase de TEC si existe la constante
+    if ( class_exists( 'Tribe__Events__Featured_Events' ) && defined( 'Tribe__Events__Featured_Events::FEATURED_EVENT_KEY' ) ) {
+        // la constante se refiere normalmente a algo como '_tribe_featured' pero por si cambia:
+        $const_key = Tribe__Events__Featured_Events::FEATURED_EVENT_KEY;
+        update_post_meta( $post_id, $const_key, 1 );
+    } else {
+        // Por compatibilidad adicional: escribir también '_tribe_featured' otra vez (no hace daño)
+        update_post_meta( $post_id, '_tribe_featured', 1 );
+    }
+
+    // Opcional: log para depuración (quita en producción)
+    if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+        error_log( "[TEC] Forzado featured en evento #{$post_id}" );
+    }
+
+}, 10, 3 );
+
 /* --------------------------------------------------------------
  *  SHORTCODE: PROGRAMACIÓN POR MES
  * -------------------------------------------------------------- */
@@ -360,7 +412,7 @@ function mostrar_programacion_por_mes( $atts ) {
 	$query = new WP_Query( $args );
 
 	if ( ! $query->have_posts() ) {
-		return '<p>' . __( 'No hay actividades programadas próximamente.', 'euterpe' ) . '</p>';
+		return '<div class="no-actividades"><p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-frown-icon lucide-frown"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>' . __( 'No hay actividades programadas próximamente.', 'euterpe' ) . '</p></div>';
 	}
 
 	$salida          = '';
@@ -405,7 +457,7 @@ function mostrar_programacion_por_mes( $atts ) {
 			$hora = get_post_meta( get_the_ID(), 'hora', true );
 
 			$salida .= '<li class="item-programacion">';
-			$salida .= '<figure><a href="' . esc_url( get_permalink() ) . '">' . get_the_post_thumbnail( get_the_ID(), 'medium' ) . '</a></figure>';
+			$salida .= '<figure><a href="' . esc_url( get_permalink() ) . '">' . get_the_post_thumbnail( get_the_ID(), 'medium_large' ) . '</a></figure>';
 			$salida .= '<div class="info">';
 			$salida .= '<h2>' . esc_html( get_the_title() ) . '</h2>';
 			$salida .= '<div class="fecha-hora"><p class="fecha">' . esc_html( $fecha_legible ) . '</p>';
@@ -429,6 +481,438 @@ function mostrar_programacion_por_mes( $atts ) {
 	return '<div class="programacion-mensual ' . esc_attr( $atts['tipo'] ) . '">' . $salida . '</div>';
 }
 add_shortcode( 'programacion_por_mes', 'mostrar_programacion_por_mes' );
+
+/* --------------------------------------------------------------
+ *  SHORTCODE: PROGRAMACIÓN POR MES SELECT MONTH
+ * -------------------------------------------------------------- */
+function mostrar_programacion_por_mes_con_select( $atts ) {
+    $atts = shortcode_atts(
+        array(
+            'tipo' => 'simple',
+        ),
+        $atts,
+        'programacion_por_mes'
+    );
+
+    $hoy     = current_time( 'Y-m-d' );
+    $hoy_num = str_replace( '-', '', $hoy );
+
+    // -----------------------------
+    // 1. Obtener todos los meses disponibles
+    // -----------------------------
+    $args_todos = array(
+        'post_type'      => 'actividad',
+        'posts_per_page' => -1,
+        'meta_key'       => 'fecha',
+        'orderby'        => 'meta_value_num',
+        'order'          => 'ASC',
+    );
+
+    $q_meses = new WP_Query($args_todos);
+    $meses_disponibles = array();
+
+    while ($q_meses->have_posts()) {
+        $q_meses->the_post();
+        $fecha_raw = get_post_meta(get_the_ID(), 'fecha', true);
+        if (!$fecha_raw) continue;
+
+        $fecha_formateada = substr($fecha_raw, 0, 4) . '-' . substr($fecha_raw, 4, 2) . '-' . substr($fecha_raw, 6, 2);
+        $timestamp = strtotime($fecha_formateada);
+        if (!$timestamp) continue;
+
+        $clave = date('Y-m', $timestamp);
+        $meses_disponibles[$clave] = date_i18n('F Y', $timestamp);
+    }
+    wp_reset_postdata();
+
+    if (empty($meses_disponibles)) {
+        return '<p>No hay actividades registradas.</p>';
+    }
+
+    // -----------------------------
+    // 2. Mes elegido
+    // -----------------------------
+    $mes_elegido = isset($_GET['mes']) ? sanitize_text_field($_GET['mes']) : '';
+
+    // -----------------------------
+    // 3. Consultar actividades según selección
+    // -----------------------------
+    if ($mes_elegido) {
+        // Filtrar por mes
+        list($anio, $mes) = explode('-', $mes_elegido);
+        $primer_dia = $anio . $mes . '01';
+        $ultimo_dia = date('Ymt', strtotime($anio . '-' . $mes . '-01'));
+
+        $args = array(
+            'post_type'      => 'actividad',
+            'posts_per_page' => -1,
+            'meta_key'       => 'fecha',
+            'orderby'        => 'meta_value_num',
+            'order'          => 'ASC',
+            'meta_query'     => array(
+                array(
+                    'key'     => 'fecha',
+                    'value'   => array($primer_dia, $ultimo_dia),
+                    'compare' => 'BETWEEN',
+                    'type'    => 'NUMERIC',
+                ),
+            ),
+        );
+    } else {
+        // Mostrar todas futuras
+        $args = array(
+            'post_type'      => 'actividad',
+            'posts_per_page' => -1,
+            'meta_key'       => 'fecha',
+            'orderby'        => 'meta_value_num',
+            'order'          => 'ASC',
+            'meta_query'     => array(
+                array(
+                    'key'     => 'fecha',
+                    'value'   => $hoy_num,
+                    'compare' => '>=',
+                    'type'    => 'NUMERIC',
+                ),
+            ),
+        );
+    }
+
+    $query = new WP_Query($args);
+
+    // -----------------------------
+    // 4. Salida HTML
+    // -----------------------------
+    ob_start();
+    ?>
+    <div class="menu-mes-programacion">
+        <form method="get" class="selector-mes-programacion">
+            <label for="selector-mes">Selecciona:</label>
+            <select id="selector-mes" name="mes" onchange="this.form.submit()">
+                <option value="" <?php selected('', $mes_elegido); ?>>Próximas actividades</option>
+                <?php foreach ($meses_disponibles as $valor => $texto): ?>
+                    <option value="<?php echo esc_attr($valor); ?>" <?php selected($mes_elegido, $valor); ?>>
+                        <?php echo esc_html(ucfirst($texto)); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </form>
+		<div class="view-controls" role="group" aria-label="Cambiar modo de visualización de entradas">
+			<button class="view-btn active" data-view="grid" aria-label="Vista en cuadrícula" aria-pressed="true"></button>
+
+			<button class="view-btn" data-view="list" aria-label="Vista en lista" aria-pressed="false"></button>
+		</div>
+    </div>
+
+    <div class="programacion-mensual <?php echo esc_attr($atts['tipo']); ?>">
+    <?php
+    if (!$query->have_posts()) {
+        echo '<div class="no-actividades"><p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-frown-icon lucide-frown"><circle cx="12" cy="12" r="10"></circle><path d="M16 16s-1.5-2-4-2-4 2-4 2"></path><line x1="9" x2="9.01" y1="9" y2="9"></line><line x1="15" x2="15.01" y1="9" y2="9"></line></svg>No hay actividades programadas próximamente.</p></div>';
+    } else {
+        $mes_actual = '';
+
+        while ($query->have_posts()) {
+            $query->the_post();
+            $fecha_raw = get_post_meta(get_the_ID(), 'fecha', true);
+            $fecha_formateada = substr($fecha_raw, 0, 4) . '-' . substr($fecha_raw, 4, 2) . '-' . substr($fecha_raw, 6, 2);
+            $timestamp = strtotime($fecha_formateada);
+            $fecha_legible = date_i18n('j \d\e F', $timestamp);
+            $hora = get_post_meta(get_the_ID(), 'hora', true);
+
+            $mes_clave = date('Y-m', $timestamp);
+            $mes_titulo = date_i18n('F Y', $timestamp);
+
+            // Nuevo mes → cerrar ul previo y mostrar título
+            if ($mes_actual !== $mes_clave) {
+                if ($mes_actual !== '') {
+                    echo '</div>';
+                }
+                echo '<div class="mes-wrapper">';
+                echo '<h2 class="mes-programacion">' . esc_html(ucfirst($mes_titulo)) . '</h2>';
+                echo '<ul class="' . esc_attr($atts['tipo'] === 'completa' ? 'lista-programacion grid-container post-overlay' : 'lista-programacion') . '">';
+                $mes_actual = $mes_clave;
+            }
+
+            // Mostrar actividad
+            if ($atts['tipo'] === 'completa') {
+                echo '<li class="item-programacion">';
+                echo '<figure class="wp-block-post-featured-image"><a href="' . esc_url(get_permalink()) . '">' . get_the_post_thumbnail(get_the_ID(), 'medium_large') . '</a></figure>';
+                echo '<div class="info">';
+                echo '<h2>' . esc_html(get_the_title()) . '</h2>';
+                echo '<div class="fecha-hora">';
+                echo '<p class="fecha">' . esc_html($fecha_legible) . '</p>';
+                if (!empty($hora)) echo '<p class="hora">' . esc_html(date_i18n('g:i a', strtotime($hora))) . '</p>';
+                echo '</div></div></li>';
+            } else {
+                echo '<li class="item-programacion"><a href="' . esc_url(get_permalink()) . '">';
+                echo '<span class="fecha">' . esc_html($fecha_legible) . '</span>';
+                echo '<span class="title-actividad">' . esc_html(get_the_title()) . '</span>';
+                echo '</a></li>';
+            }
+        }
+
+        echo '</ul></div>';
+    }
+    wp_reset_postdata();
+
+    // -----------------------------
+    // 5. Últimos 3 eventos pasados
+    // -----------------------------
+    if ( ! $mes_elegido ) {
+        $args_pasadas = array(
+            'post_type'      => 'actividad',
+            'posts_per_page' => 3,
+            'meta_key'       => 'fecha',
+            'orderby'        => 'meta_value_num',
+            'order'          => 'DESC',
+            'meta_query'     => array(
+                array(
+                    'key'     => 'fecha',
+                    'value'   => $hoy_num,
+                    'compare' => '<',
+                    'type'    => 'NUMERIC',
+                ),
+            ),
+        );
+
+        $query_pasadas = new WP_Query($args_pasadas);
+
+        if ($query_pasadas->have_posts()) {
+            echo '<div class="ultimos-eventos"><h2 class="mes-programacion">Actividades recientes</h2>';
+            echo '<ul class="' . esc_attr($atts['tipo'] === 'completa' ? 'lista-programacion grid-container post-overlay' : 'lista-programacion') . '">';
+            while ($query_pasadas->have_posts()) {
+                $query_pasadas->the_post();
+                $fecha_raw = get_post_meta(get_the_ID(), 'fecha', true);
+                $fecha_formateada = substr($fecha_raw, 0, 4) . '-' . substr($fecha_raw, 4, 2) . '-' . substr($fecha_raw, 6, 2);
+                $timestamp = strtotime($fecha_formateada);
+                $fecha_legible = date_i18n('j \d\e F', $timestamp);
+                $hora = get_post_meta(get_the_ID(), 'hora', true);
+
+                if ($atts['tipo'] === 'completa') {
+                    echo '<li class="item-programacion">';
+                    echo '<figure class="wp-block-post-featured-image"><a href="' . esc_url(get_permalink()) . '">' . get_the_post_thumbnail(get_the_ID(), 'medium') . '</a></figure>';
+                    echo '<div class="info">';
+                    echo '<h2>' . esc_html(get_the_title()) . '</h2>';
+                    echo '<div class="fecha-hora">';
+                    echo '<p class="fecha">' . esc_html($fecha_legible) . '</p>';
+                    if (!empty($hora)) echo '<p class="hora">' . esc_html(date_i18n('g:i a', strtotime($hora))) . '</p>';
+                    echo '</div></div></li>';
+                } else {
+                    echo '<li class="item-programacion"><a href="' . esc_url(get_permalink()) . '">';
+                    echo '<span class="fecha">' . esc_html($fecha_legible) . '</span>';
+                    echo '<span class="title-actividad">' . esc_html(get_the_title()) . '</span>';
+                    echo '</a></li>';
+                }
+            }
+            echo '</ul></div>';
+            wp_reset_postdata();
+        }
+    }
+
+    echo '</div>'; // fin programacion-mensual
+
+    return ob_get_clean();
+}
+add_shortcode( 'programacion_por_mes_con_select', 'mostrar_programacion_por_mes_con_select' );
+
+/* --------------------------------------------------------------
+ *  SHORTCODE: PRÓXIMOS EVENTOS THE EVENT CALENDAR
+ * -------------------------------------------------------------- */
+function euterpe_proximos_eventos() {
+
+		$hoy = current_time( 'Y-m-d H:i:s' );
+
+	$args = array(
+		'post_type'      => 'tribe_events',
+		'posts_per_page' => 2,
+		'post_status'    => 'publish',
+		'meta_key'       => '_EventStartDate',
+		'orderby'        => 'meta_value',
+		'order'          => 'ASC',
+		'meta_query'     => array(
+			array(
+				'key'     => '_EventStartDate',
+				'value'   => $hoy,
+				'compare' => '>=',
+				'type'    => 'DATETIME',
+			),
+		),
+		'fields' => 'ids',
+	);
+
+	$query = new WP_Query( $args );
+
+	if ( ! $query->have_posts() ) {
+		return '<div class="no-actividades"><p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-x-icon lucide-calendar-x"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m14 14-4 4"/><path d="m10 14 4 4"/></svg>No hay actividades programadas próximamente.</p></div>';
+	}
+
+	ob_start(); ?>
+
+	<div class="wp-block-query">
+		<ul class="wp-block-post-template lista-programacion grid-container post-overlay">
+
+			<?php
+			foreach ( $query->posts as $event_id ) :
+				setup_postdata( get_post( $event_id ) );
+
+				$fecha_legible = tribe_get_start_date( $event_id, false, 'j \d\e F Y' );
+				$hora          = tribe_get_start_date( $event_id, false, 'g:i a' );
+			?>
+
+				<li class="wp-block-post item-programacion">
+					<figure class="wp-block-post-featured-image">
+						<a href="<?php echo get_permalink( $event_id ); ?>">
+							<?php echo get_the_post_thumbnail( $event_id, 'medium_large' ); ?>
+						</a>
+					</figure>
+
+					<div class="info wp-block-group">
+						<h2 class="wp-block-post-title">
+							<?php echo get_the_title( $event_id ); ?>
+						</h2>
+
+						<div class="fecha-hora wp-block-group">
+							<p class="fecha"><?php echo esc_html( $fecha_legible ); ?></p>
+							<p class="hora"><?php echo esc_html( $hora ); ?></p>
+						</div>
+					</div>
+				</li>
+
+			<?php endforeach; wp_reset_postdata(); ?>
+
+		</ul>
+	</div>
+
+	<?php
+	return ob_get_clean();
+}
+add_shortcode( 'proximos_eventos', 'euterpe_proximos_eventos' );
+
+add_filter( 'tribe_the_notices', function( $html, $notices ) {
+
+    // Convertimos a array y quitamos el aviso no deseado
+    $filtered_notices = array_filter( $notices, function( $notice ) {
+        return strpos( $notice, 'No se ha encontrado ningún resultado' ) === false;
+    });
+
+    if ( empty( $filtered_notices ) ) {
+        return ''; // ningún aviso queda
+    }
+
+    // Reconstruimos el HTML con los avisos restantes
+    $html = '<div class="tribe-events-notices"><ul><li>' . implode( '</li><li>', $filtered_notices ) . '</li></ul></div>';
+
+    return $html;
+
+}, 10, 2 );
+/* --------------------------------------------------------------
+ *  SHORTCODE: PRODUCCIONES 
+ * -------------------------------------------------------------- */
+function euterpe_producciones( $atts ) {
+	 $atts = shortcode_atts(
+        array(
+            'limite'     => 6,
+            'paginacion' => 'true',
+        ),
+        $atts,
+        'producciones'
+    );
+
+    // Paginación estándar de WP
+    $paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+
+    $args = array(
+        'post_type'      => 'produccion', 
+        'posts_per_page' => intval( $atts['limite'] ),
+        'paged'          => $paged,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+    );
+
+    $query = new WP_Query( $args );
+
+    if ( ! $query->have_posts() ) {
+        return '<p>No hay producciones disponibles.</p>';
+    }
+
+    ob_start(); ?>
+
+    <div class="wp-block-query">
+        <ul class="wp-block-post-template lista-programacion grid-container producciones post-overlay">
+
+            <?php while ( $query->have_posts() ) : $query->the_post(); ?>
+
+                <li class="wp-block-post item-programacion">
+
+                    <figure class="wp-block-post-featured-image">
+                        <a href="<?php the_permalink(); ?>">
+                           <?php
+								the_post_thumbnail(
+									'medium_large',
+									array(
+										'loading'        => 'lazy',
+										'fetchpriority'  => 'low',
+										'decoding'       => 'async',
+										'sizes'          => '(max-width: 768px) 100vw, 33vw',
+									)
+								);
+							?>
+                        </a>
+                    </figure>
+
+                    <div class="info wp-block-group">
+
+                        <h2 class="wp-block-post-title"><?php the_title(); ?></h2>
+
+                    </div>
+
+                </li>
+
+            <?php endwhile; ?>
+
+        </ul>
+
+      <?php
+		if ( $atts['paginacion'] === 'true' ) :
+			$total_pages = $query->max_num_pages;
+			if ( $total_pages > 1 ) :
+				$current_page = max( 1, get_query_var( 'paged' ) );
+				?>
+				<nav class="pagination wp-block-query-pagination" aria-label="Paginación">
+					<?php if ( $current_page > 1 ) : ?>
+						<a href="<?php echo get_pagenum_link( $current_page - 1 ); ?>" class="wp-block-query-pagination-previous">
+							<span class="wp-block-query-pagination-previous-arrow is-arrow-arrow" aria-hidden="true">←</span>Anteriores
+						</a>
+					<?php endif; ?>
+
+					<div class="wp-block-query-pagination-numbers">
+						<?php
+						for ( $i = 1; $i <= $total_pages; $i++ ) {
+							if ( $i == $current_page ) {
+								echo '<span aria-current="page" class="page-numbers current">' . $i . '</span>';
+							} else {
+								echo '<a class="page-numbers" href="' . get_pagenum_link( $i ) . '">' . $i . '</a>';
+							}
+						}
+						?>
+					</div>
+
+					<?php if ( $current_page < $total_pages ) : ?>
+						<a href="<?php echo get_pagenum_link( $current_page + 1 ); ?>" class="wp-block-query-pagination-next">
+							Siguientes<span class="wp-block-query-pagination-next-arrow is-arrow-arrow" aria-hidden="true">→</span>
+						</a>
+					<?php endif; ?>
+				</nav>
+			<?php endif;
+		endif; // fin del if de paginación
+		?>
+
+    </div>
+
+    <?php
+    wp_reset_postdata();
+    return ob_get_clean();
+}
+add_shortcode( 'producciones', 'euterpe_producciones' );
 
 /* --------------------------------------------------------------
  *  SHORTCODE: COLABORADORES SLIDER
